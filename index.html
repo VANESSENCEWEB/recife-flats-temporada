@@ -18,17 +18,21 @@
   <link rel="stylesheet" href="/styles/components/menu-overlay.css" />
 </head>
 <body>
-  <site-navbar></site-navbar>
-  <site-menu></site-menu>
+  <rf-menu wraps=".site-content"></rf-menu>
 
-  <main>
-    <!-- Conteúdo da home virá no Dia 3 -->
-    <div class="container" style="padding-block: 4rem;">
-      <h1 style="font-size: var(--text-3xl); margin-bottom: 1rem;">Shell do site pronto</h1>
-      <p style="color: var(--color-neutral-500);">Navbar + Menu funcionando. Próximo passo: Hero (Dia 3).</p>
-    </div>
-  </main>
+  <div class="site-content">
+    <rf-navbar></rf-navbar>
 
+    <main>
+      <!-- Conteúdo da home virá no Dia 3 -->
+      <div class="container" style="padding-block: 4rem;">
+        <h1 style="font-size: var(--text-3xl); margin-bottom: 1rem;">Shell do site pronto</h1>
+        <p style="color: var(--color-neutral-500);">Navbar + Menu funcionando. Próximo passo: Hero (Dia 3).</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script type="module" src="/scripts/main.js"></script>
 </body>
 </html>
