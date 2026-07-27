@@ -1,0 +1,89 @@
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.menu-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.menu-overlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding-inline: var(--space-4);
+  border-bottom: 1px solid var(--color-neutral-100);
+}
+
+.menu-overlay__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  color: var(--color-neutral-800);
+}
+
+.menu-overlay__close:hover {
+  background-color: var(--color-neutral-100);
+}
+
+.menu-overlay__nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-8) var(--space-6);
+  gap: var(--space-2);
+}
+
+.menu-overlay__link {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-neutral-900);
+  padding: var(--space-3) 0;
+  transition: color var(--transition-fast);
+}
+
+.menu-overlay__link:hover,
+.menu-overlay__link[aria-current="page"] {
+  color: var(--color-primary);
+}
+
+.menu-overlay__footer {
+  padding: var(--space-6);
+  border-top: 1px solid var(--color-neutral-100);
+}
+
+.menu-overlay__cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: var(--space-4);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-lg);
+}
+
+.menu-overlay__cta:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Esconde o overlay no desktop */
+@media (min-width: 768px) {
+  .menu-overlay {
+    display: none;
+  }
+}
