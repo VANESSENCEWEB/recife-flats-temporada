@@ -1,50 +1,47 @@
-/* ===== Reset moderno ===== */
-*,
-*::before,
-*::after {
+/* ============================================================
+   BASE — Reset + defaults globais
+============================================================ */
+
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 html {
+  height: 100%;
+  font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: var(--font-primary);
-  font-size: var(--text-base);
-  font-weight: var(--font-regular);
-  line-height: 1.6;
-  color: var(--color-neutral-800);
-  background-color: var(--color-white);
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--ink);
+  background-color: var(--sand-200);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
+img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
-  height: auto;
 }
 
-input,
-button,
-textarea,
-select {
+input, button, textarea, select {
   font: inherit;
   color: inherit;
 }
 
 button {
   cursor: pointer;
-  border: none;
   background: none;
+  border: none;
 }
 
 a {
@@ -52,27 +49,50 @@ a {
   text-decoration: none;
 }
 
-ul,
-ol {
+ul {
   list-style: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: var(--font-semibold);
-  line-height: 1.25;
-  color: var(--color-neutral-900);
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  color: var(--ink);
+  margin: 0 0 0.5em;
 }
 
-p {
-  margin-bottom: var(--space-4);
+p { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
 }
 
-/* Remove setas de number input */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+::selection {
+  background: var(--terracotta-600);
+  color: var(--paper);
 }
-input[type="number"] {
-  -moz-appearance: textfield;
+
+rf-announcement,
+rf-navbar,
+rf-menu,
+rf-hero,
+rf-home-marquee,
+rf-trust-strip,
+rf-booking-search,
+rf-breadcrumbs,
+rf-apartment-card,
+rf-apartment-grid-card,
+rf-apartments-hub,
+rf-neighborhood-hub,
+rf-apartments-teaser,
+rf-apartment-detail,
+rf-location-section,
+rf-footer,
+rf-floating-whatsapp,
+rf-bio-page,
+rf-bio-booking-modal,
+rf-reservation-steps {
+  display: block;
 }
