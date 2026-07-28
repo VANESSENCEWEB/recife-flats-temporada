@@ -1,0 +1,171 @@
+/* ============================================================
+   HOME — Ritmo: branco ↔ creme ↔ oceano (hierarquia clara)
+============================================================ */
+
+/* ---- Moldura casa (index-backup.html) ---- */
+.site-content--house {
+  padding-top: calc(var(--roof-height) + var(--announcement-height));
+}
+
+.site-content--house:not(:has(.announcement)) {
+  padding-top: var(--roof-height);
+}
+
+@media (max-width: 900px) {
+  .site-content--house {
+    padding-top: var(--announcement-height);
+  }
+
+  .site-content--house:not(:has(.announcement)) {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-content:has(.announcement) {
+    padding-top: var(--announcement-height-mobile);
+  }
+
+  .site-content--house {
+    padding-top: var(--announcement-height-mobile);
+  }
+}
+
+/* ============================================================
+   HOME FULL BLEED — index.html (sem moldura verde, vídeo 100%)
+============================================================ */
+
+.site-content--home-full {
+  padding-top: 0;
+  --site-chrome-height: calc(var(--nav-height) + var(--announcement-height));
+}
+
+.site-content--home-full:not(:has(.announcement)) {
+  --site-chrome-height: var(--nav-height);
+}
+
+.site-content--home-full .site-chrome {
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--z-nav) + 2);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.site-content--home-full .announcement {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  flex-shrink: 0;
+  margin: 0;
+  border: none;
+  min-height: var(--announcement-height);
+  max-height: var(--announcement-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0;
+  box-sizing: border-box;
+}
+
+.site-content--home-full rf-navbar {
+  height: auto;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.site-content--home-full .navbar {
+  position: relative;
+  top: auto !important;
+  left: auto;
+  right: auto;
+  width: 100%;
+  margin: 0;
+  box-shadow: none;
+  border: none;
+}
+
+.site-content--home-full .navbar.is-scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.site-content--home-full .hero {
+  margin-top: calc(-1 * var(--site-chrome-height));
+  margin-inline: 0;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  --hero-header-offset: var(--site-chrome-height);
+}
+
+.site-content--home-full .matching-split {
+  margin-inline: 0;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+@media (max-width: 600px) {
+  .site-content--home-full {
+    --site-chrome-height: calc(var(--nav-height-mobile) + var(--announcement-height-mobile));
+  }
+
+  .site-content--home-full:not(:has(.announcement)) {
+    --site-chrome-height: var(--nav-height-mobile);
+  }
+
+  .site-content--home-full .hero {
+    --hero-header-offset: var(--site-chrome-height);
+    margin-top: calc(-1 * var(--site-chrome-height));
+  }
+}
+
+@media (max-width: 480px) {
+  .site-content--home-full .announcement {
+    min-height: var(--announcement-height-mobile);
+    max-height: var(--announcement-height-mobile);
+  }
+}
+
+/*
+  Ordem e superfície:
+  1. Hero          — vídeo (full bleed)
+  2. Marquee + trust
+  3. Apartamentos  — branco
+  4. Matching      — creme
+  5. Como reservar
+  6. Comodidades / Por que nós
+  7. Localização
+  8. Depoimentos
+  9. FAQ
+  10. Reserva      — oceano
+  11. Footer       — escuro
+*/
+
+rf-apartments-teaser,
+rf-matching-teaser,
+rf-amenities-section,
+rf-why-choose-section,
+rf-testimonials-section,
+rf-faq-section,
+rf-location-section,
+rf-booking-promo {
+  display: block;
+}
+
+/* Abaixo da dobra: adia layout/paint até perto da viewport */
+rf-matching-teaser,
+rf-reservation-steps,
+rf-amenities-section,
+rf-why-choose-section,
+rf-location-section,
+rf-testimonials-section,
+rf-faq-section,
+rf-booking-promo {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 520px;
+}
