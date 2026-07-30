@@ -5,103 +5,106 @@
 ============================================================ */
 
 :root {
-  /* ---------- TERRACOTTA ---------- */
+   /* ---------- SOL / OURO (acento principal) ---------- */
+  --sol-100: #FFF8E8;
+  --sol-200: #FEEDED;
+  --sol-300: #FBE3A8;
+  --sol-400: #F5C96A;
+  --sol-500: #E8A93A;   /* sol principal */
+  --sol-600: #D4891F;
+  --sol-700: #B56B14;
+  --sol-800: #8F520F;
+  --sol-900: #6B3C0C;
+
+  /* ---------- ÁGUA / ORLA (apoio) ---------- */
+  --agua-100: #E7F6F7;
+  --agua-200: #C8EAED;
+  --agua-300: #8FD0D6;
+  --agua-400: #4FAEBA;
+  --agua-500: #2A8F9C;  /* água clara, não neon */
+  --agua-600: #1F6F7A;
+  --agua-700: #18565E;
+
+  /* ---------- MANGUE (mais aberto / menos “floresta”) ---------- */
+  --mangue-100: #EEF5F1;
+  --mangue-200: #D5E6DC;
+  --mangue-300: #A9C9B6;
+  --mangue-400: #6FA88A;
+  --mangue-500: #3F8A68;
+  --mangue-600: #2A6B4F;  /* navbar / blocos escuros */
+  --mangue-700: #215540;
+  --mangue-800: #1A4333;
+  --mangue-900: #143328;
+   --mangue-1000: #0E241C;
+
+  /* ---------- AREIA / NEUTROS (mais claros e limpos) ---------- */
+  
+  --paper:        #FFFBF4;  /* quase branco-sol */
+  --sand-200:     #F7F0E3;
+  --sand-300:     #EFE4CF;
+  --sand-400:     #DFCFAE;
+  --sand-500:     #C8B48A;
+  --sand-600:     #A89268;
+  --sand-700:     #8A7450;
+  --sand-800:     #6B5A42;
+  --sand-900:     #5C4F41;
+  --sand-1000:    #453A2F;
+  --sand-1100:    #332A22;
+  --ink:          #243028;  /* verde-escuro suave, não marrom pesado */
+  --ink-soft:     #5A6A60;
+  --line:         rgba(36, 48, 40, 0.12);
+
+  /* terracota fica só como apoio (não manda mais no visual) */
   --terracotta-100: #FDF1EC;
   --terracotta-200: #FAE0D3;
   --terracotta-300: #F0C6A8;
   --terracotta-400: #E2A67A;
   --terracotta-500: #CD7C4E;
-  --terracotta-600: #B8502F;
+  --terracotta-600: #C45C26;
   --terracotta-700: #9C4128;
   --terracotta-800: #8C3A22;
   --terracotta-900: #6E2D1A;
 
-  /* ---------- MANGUE ---------- */
-  --mangue-100: #EAF0EC;
-  --mangue-200: #D0DFD4;
-  --mangue-300: #A8C4AF;
-  --mangue-400: #7FA98B;
-  --mangue-500: #578566;
-  --mangue-600: #33513F;
-  --mangue-700: #294232;
-  --mangue-800: #223A2C;
-  --mangue-900: #1A2E22;
-  --mangue-1000: #132119;
+  /* ---------- ACENTOS ---------- */
+  --gold:         var(--sol-400);
+  --gold-dark:    var(--sol-600);
 
-  /* ---------- SAND / NEUTRAL ---------- */
-  --paper:        #FBF6EC;
-  --sand-200:     #F2E8D8;
-  --sand-300:     #E8DAC3;
-  --sand-400:     #D9C7A8;
-  --sand-500:     #C4AD87;
-  --sand-600:     #A88F68;
-  --sand-700:     #8A7250;
-  --sand-800:     #6B5A42;
-  --sand-900:     #5C4F41;
-  --sand-1000:    #453A2F;
-  --sand-1100:    #332A22;
-  --ink:          #2A2118;
-  --ink-soft:     #5C4F41;
-  --line:         rgba(42, 33, 24, 0.12);
 
-  /* ---------- ACCENTOS ---------- */
-  --gold:         #F0C79A;
-  --gold-dark:    #C99A3D;
+  /* ---------- ALIASES (pra o site atual continuar funcionando) ---------- */
+  --areia:         var(--sand-200);
+  --areia-escura:  var(--sand-300);
+  --mare:          var(--mangue-600);
+  --mare-escuro:   var(--mangue-800);
+  --mare-claro:    var(--mangue-500);
+  --tijolo:        var(--sol-500);       /* botões passam a “sol” */
+  --tijolo-escuro: var(--sol-700);
+  --coco:          var(--mangue-600);
+  --sol:           var(--sol-400);
+  --tinta:         var(--ink);
+  --branco:        var(--paper);
+  --cream:         var(--sand-200);
+  --cream-dark:    var(--sand-300);
+  --ocean:         var(--mangue-600);
+  --ocean-light:   var(--mangue-500);
+  --clay:          var(--sol-500);
+  --clay-light:    var(--sol-700);
+  --sand:          var(--sol-300);
+  --sand-light:    var(--sol-200);
+  --sun:           var(--sol-400);
+  --sun-light:     var(--sol-200);
+  --sun-dark:      var(--sol-600);
+  --text:          var(--ink);
+  --text-muted:    var(--ink-soft);
+  --white:         var(--paper);
+  --black:         var(--mangue-900);
+  --accent:        var(--sol-500);       /* CTA principal = sol */
+  --accent-soft:   var(--sol-200);
+  --accent-dark:   var(--mangue-600);
+  --accent-darker: var(--mangue-800);
+  --brand-blue:    var(--agua-500);      /* toque de orla */
+  --sky-soft:      var(--agua-100);
+  --sky-mid:       var(--agua-300);
 
-  /* ---------- SEMÂNTICOS ---------- */
-  --success-bg:   #EAF0EC;
-  --success-text: #294232;
-  --warning-bg:   #FBEFDA;
-  --warning-text: #8A5A12;
-  --error-bg:     #F7E7E4;
-  --error-text:   #8C2F22;
-  --info-bg:      #E7EEEE;
-  --info-text:    #3C5A61;
-
-  /* ---------- ALIASES LEGADOS (componentes existentes) ---------- */
-  --areia:        var(--sand-200);
-  --areia-escura: var(--sand-300);
-  --mare:         var(--mangue-600);
-  --mare-escuro:  var(--mangue-800);
-  --mare-claro:   var(--mangue-500);
-  --tijolo:       var(--terracotta-600);
-  --tijolo-escuro:var(--terracotta-800);
-  --coco:         var(--mangue-600);
-  --sol:          var(--gold);
-  --tinta:        var(--ink);
-  --branco:       var(--paper);
-
-  --cream:        var(--sand-200);
-  --cream-dark:   var(--sand-300);
-  --ocean:        var(--mangue-600);
-  --ocean-light:  var(--mangue-500);
-  --clay:         var(--terracotta-600);
-  --clay-light:   var(--terracotta-800);
-  --sand:         var(--gold);
-  --sand-light:   #F5D4A8;
-  --sun:          var(--gold);
-  --sun-light:    var(--gold);
-  --sun-dark:     var(--gold-dark);
-  --text:         var(--ink);
-  --text-muted:   var(--ink-soft);
-  --white:        var(--paper);
-  --black:        var(--mangue-900);
-  --accent:       var(--terracotta-600);
-  --accent-soft:  var(--terracotta-200);
-  --accent-dark:  var(--mangue-600);
-  --accent-darker:var(--mangue-800);
-  --brand-blue:   var(--mangue-500);
-  --sky-soft:     var(--mangue-100);
-  --sky-mid:      var(--mangue-400);
-
-  --white-90: rgba(251, 246, 236, 0.90);
-  --white-65: rgba(251, 246, 236, 0.65);
-  --white-40: rgba(251, 246, 236, 0.40);
-  --white-20: rgba(251, 246, 236, 0.20);
-  --white-10: rgba(251, 246, 236, 0.10);
-
-  --mare-text-soft: rgba(251, 246, 236, 0.82);
-  --mare-text-mid:  var(--mangue-400);
 
   /* ---------- TIPOGRAFIA ---------- */
   --font-display: "Fraunces", Georgia, serif;
