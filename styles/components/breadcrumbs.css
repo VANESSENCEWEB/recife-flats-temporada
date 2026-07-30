@@ -1,0 +1,53 @@
+/* ============================================================
+   BREADCRUMBS — Navegação hierárquica
+============================================================ */
+
+.breadcrumbs {
+  padding-block: var(--space-3) 0;
+}
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+  list-style: none;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.breadcrumbs__item:not(:last-child)::after {
+  content: '/';
+  color: var(--sand);
+  margin-left: var(--space-2);
+}
+
+.breadcrumbs__item a {
+  color: var(--accent-dark);
+  transition: color var(--dur-fast);
+}
+
+.breadcrumbs__item a:hover {
+  color: var(--accent-darker);
+}
+
+.breadcrumbs__item[aria-current="page"] span,
+.breadcrumbs__item:last-child span {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.page-shell__breadcrumbs {
+  padding-block: calc(var(--nav-height) + var(--space-4)) var(--space-2);
+  background: var(--cream);
+}
+
+.page-shell__breadcrumbs .breadcrumbs {
+  padding-block: 0;
+}
