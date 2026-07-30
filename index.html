@@ -4,35 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recife Flats Temporada | Aluguel em Boa Viagem e Pina</title>
-  
-  <!-- Fontes -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..700,0..1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/styles/tokens.css" />
-  <link rel="stylesheet" href="/styles/base.css" />
-  <link rel="stylesheet" href="/styles/utilities.css" />
-  <link rel="stylesheet" href="/styles/components/navbar.css" />
-  <link rel="stylesheet" href="/styles/components/menu-overlay.css" />
+  
+<!-- Import Styles -->
+<link rel="stylesheet" href="./styles/tokens.css" />
+<link rel="stylesheet" href="./styles/base.css" />
+<link rel="stylesheet" href="./styles/utilities.css" />
+<link rel="stylesheet" href="./styles/components/button.css" />
+<link rel="stylesheet" href="./styles/components/navbar.css" />
+<link rel="stylesheet" href="./styles/components/menu-overlay.css" />
+<link rel="stylesheet" href="./styles/components/hero.css" />
+<link rel="stylesheet" href="./styles/pages/home.css" />
+
+
 </head>
 <body>
   <rf-menu wraps=".site-content"></rf-menu>
 
   <div class="site-content">
-    <rf-navbar></rf-navbar>
+    <rf-navbar over-hero hero-target="#hero"></rf-navbar>
 
-    <main>
-      <!-- Conteúdo da home virá no Dia 3 -->
-      <div class="container" style="padding-block: 4rem;">
-        <h1 style="font-size: var(--text-3xl); margin-bottom: 1rem;">Shell do site pronto</h1>
-        <p style="color: var(--color-neutral-500);">Navbar + Menu funcionando. Próximo passo: Hero (Dia 3).</p>
-      </div>
-    </main>
+    <rf-hero
+      hero-id="home"
+      api-base=""
+      video-day="./assets/videos/video.mp4"
+      video-night="./assets/videos/video.mp4"
+      poster-day="./assets/images/boa_viagem-01.avif.png"
+      poster-night="./assets/images/boa_viagem-01.avif.png"
+      timezone="America/Recife"
+      day-start="6"
+      night-start="18"
+      eyebrow="Boa Viagem e Pina, Recife · PE"
+      title='Um lugar de <em>verdade</em> pra ficar em Recife.'
+      description="Apartamentos mobiliados, prontos pra usar, com fotos reais e reserva direta — sem surpresa na chegada."
+      no-search>
+    </rf-hero>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script type="module" src="/scripts/main.js"></script>
+  <script type="module" src="./scripts/main.js"></script>
 </body>
 </html>
