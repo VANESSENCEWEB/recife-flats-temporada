@@ -4,6 +4,7 @@
 
 import { pageHref } from '../utils/paths.js';
 import { whatsappUrl } from '../data/location.js';
+import { beachDecorLayer } from '../data/beach-decor.js';
 
 class RFMatchingTeaser extends HTMLElement {
   connectedCallback() {
@@ -11,6 +12,7 @@ class RFMatchingTeaser extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section matching-teaser" aria-labelledby="matching-teaser-title">
+        ${beachDecorLayer(['palm', 'wave', 'sun'], 'soft')}
         <div class="container matching-teaser__inner">
           <div class="matching-teaser__copy">
             <span class="eyebrow">Não sabe qual escolher?</span>

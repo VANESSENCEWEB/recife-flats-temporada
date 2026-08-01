@@ -2,6 +2,8 @@
  * <rf-why-choose-section> — Diferenciais da hospedagem.
  */
 
+import { beachDecorLayer } from '../data/beach-decor.js';
+
 class RFWhyChooseSection extends HTMLElement {
   connectedCallback() {
     const items = [
@@ -21,6 +23,7 @@ class RFWhyChooseSection extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section why-choose" aria-labelledby="why-choose-title">
+        ${beachDecorLayer(['palm', 'starfish', 'shell'], 'ink')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Por que nós</span>

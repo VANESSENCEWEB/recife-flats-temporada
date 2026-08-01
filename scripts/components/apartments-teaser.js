@@ -4,6 +4,7 @@
 
 import { APARTAMENTOS } from '../data/apartamentos.js';
 import { pageHref } from '../utils/paths.js';
+import { beachDecorLayer } from '../data/beach-decor.js';
 import './apartment-card.js';
 
 class RFApartmentsTeaser extends HTMLElement {
@@ -12,6 +13,7 @@ class RFApartmentsTeaser extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section apartments-teaser" id="apartamentos" aria-labelledby="apartments-teaser-title">
+        ${beachDecorLayer(['wave', 'starfish'], 'ink')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Nossa coleção</span>

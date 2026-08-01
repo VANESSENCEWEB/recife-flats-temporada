@@ -2,6 +2,8 @@
  * <rf-amenities-section> — Comodidades recorrentes nos flats.
  */
 
+import { beachDecorLayer } from '../data/beach-decor.js';
+
 class RFAmenitiesSection extends HTMLElement {
   connectedCallback() {
     const items = [
@@ -15,6 +17,7 @@ class RFAmenitiesSection extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section amenities-section" aria-labelledby="amenities-title">
+        ${beachDecorLayer(['shell', 'wave', 'sun'], 'soft')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Estrutura</span>

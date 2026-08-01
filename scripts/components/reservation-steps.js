@@ -2,6 +2,8 @@
  * <rf-reservation-steps> — Como reservar em 3 passos.
  */
 
+import { beachDecorLayer } from '../data/beach-decor.js';
+
 class RFReservationSteps extends HTMLElement {
   connectedCallback() {
     const steps = [
@@ -24,6 +26,7 @@ class RFReservationSteps extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section reservation-steps" aria-labelledby="reservation-steps-title">
+        ${beachDecorLayer(['starfish', 'palm', 'wave'], 'soft')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Simples e direto</span>
