@@ -40,6 +40,30 @@ function addDaysISO(iso, days) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
+function nightsBetween(checkIn, checkOut) {
+  if (!checkIn || !checkOut) return 0;
+  const a = new Date(`${checkIn}T12:00:00`);
+  const b = new Date(`${checkOut}T12:00:00`);
+  const diff = Math.round((b - a) / 86400000);
+  return diff > 0 ? diff : 0;
+}
+
+function parseBRL(value) {
+  if (!value) return null;
+  const n = Number(String(value).replace(/[^\d]/g, ''));
+  return Number.isFinite(n) ? n : null;
+}
+
+function formatBRL(n) {
+  return `R$ ${Number(n).toLocaleString('pt-BR')}`;
+}
+
+function aptTypeLabel(apt) {
+  if (apt.bedrooms <= 1 && /studio/i.test(`${apt.name} ${apt.badge || ''}`)) return 'Studio';
+  if (apt.bedrooms <= 1) return '1 quarto';
+  return `${apt.bedrooms} quartos`;
+}
+
 function nearbyFor(apt) {
   if (apt.neighborhoodSlug === 'pina') {
     return [
@@ -54,6 +78,16 @@ function nearbyFor(apt) {
     { title: 'Comércio do bairro', meta: 'Padaria, mercado e farmácia' },
     { title: 'Shopping Recife', meta: 'Próximo · carro ou app' },
     { title: 'Aeroporto', meta: '~8–15 min de carro' },
+  ];
+}
+
+function houseRulesFor(apt) {
+  return [
+    'Check-in e check-out combinados na reserva',
+    `Máximo de ${apt.guests} hóspedes`,
+    'Sem festas ou eventos',
+    apt.petFriendly ? 'Pets sob pedido / combinado prévio' : 'Pets sob consulta',
+    'Silêncio entre 22h e 7h',
   ];
 }
 
@@ -87,13 +121,20 @@ class RFApartmentDetail extends HTMLElement {
     const images = resolveImages(apt);
     const cover = images.slice(0, 5);
     const n = getNeighborhood(apt.neighborhoodSlug);
-    const waBase = `Olá! Quero reservar o ${apt.name}.`;
+    const priceNight = parseBRL(apt.priceFrom);
+    const cleaningFee = Number(apt.cleaningFee) || 0;
     const priceLabel = apt.priceFrom || 'Sob consulta';
-    const priceNote = apt.priceFrom ? (apt.priceNote || '/dia') : '';
+    const priceNote = apt.priceFrom ? (apt.priceNote || '/noite') : '';
     const minIn = todayISO();
     const defaultOut = addDaysISO(minIn, 3);
     const nearby = nearbyFor(apt);
     const hasReviews = apt.reviewCount > 0;
+    const maxGuests = apt.guests || 2;
+    const typeLabel = aptTypeLabel(apt);
+    const rules = houseRulesFor(apt);
+    const defaultNights = 3;
+    const defaultSub = priceNight != null ? priceNight * defaultNights : 0;
+    const defaultTotal = defaultSub + cleaningFee;
 
     const decorMotifs = apt.neighborhoodSlug === 'pina'
       ? ['shell', 'surfboards', 'sun']
@@ -102,19 +143,10 @@ class RFApartmentDetail extends HTMLElement {
     this.innerHTML = `
       <article class="apartment-detail">
         ${beachDecorLayer(decorMotifs, 'soft')}
-        <nav class="apartment-detail__tabs" aria-label="Seções do imóvel">
-          <div class="container apartment-detail__tabs-inner">
-            <a href="#visao-geral">Visão geral</a>
-            <a href="#comodidades">Comodidades</a>
-            <a href="#avaliacoes">Avaliações</a>
-            <a href="#localizacao">Localização</a>
-            <a href="#regras">Regras</a>
-          </div>
-        </nav>
 
         <div class="container">
           <header class="apartment-detail__title">
-            <p class="apartment-detail__eyebrow">${apt.neighborhood}${apt.badge ? ` · ${apt.badge}` : ''}</p>
+            <p class="apartment-detail__eyebrow">${apt.neighborhood} · ${typeLabel}</p>
             <h1>${apt.name}</h1>
             <div class="apartment-detail__meta-row">
               <p class="apartment-detail__rating">
@@ -135,17 +167,27 @@ class RFApartmentDetail extends HTMLElement {
                 ${pictureHtml(img.src, img.alt, i === 0)}
               </figure>
             `).join('')}
-            ${images.length > 5 ? `
-              <button type="button" class="apartment-detail__show-all" data-gallery-open>
-                Mostrar todas as fotos (${images.length})
-              </button>
-            ` : ''}
+            <button type="button" class="apartment-detail__show-all" data-gallery-open>
+              Mostrar todas as fotos (${images.length})
+            </button>
           </div>
+        </div>
 
+        <nav class="apartment-detail__tabs" aria-label="Seções do imóvel">
+          <div class="container apartment-detail__tabs-inner">
+            <a href="#visao-geral">Visão geral</a>
+            <a href="#comodidades">Comodidades</a>
+            <a href="#avaliacoes">Avaliações</a>
+            <a href="#localizacao">Localização</a>
+            <a href="#regras">Regras</a>
+          </div>
+        </nav>
+
+        <div class="container">
           <div class="apartment-detail__layout">
             <div class="apartment-detail__main">
               <section class="apartment-detail__block" id="visao-geral">
-                <h2>${apt.shortName}</h2>
+                <h2>Sobre este espaço</h2>
                 <p class="apartment-detail__facts">
                   ${apt.guests} hóspedes · ${apt.bedrooms} quarto${apt.bedrooms > 1 ? 's' : ''} · ${apt.beds} cama${apt.beds > 1 ? 's' : ''} · ${apt.bathrooms} banheiro${apt.bathrooms > 1 ? 's' : ''}${apt.size ? ` · ${apt.size}` : ''}
                 </p>
@@ -163,13 +205,9 @@ class RFApartmentDetail extends HTMLElement {
                     <span>Fale conosco no WhatsApp — sem intermediário.</span>
                   </li>
                 </ul>
-              </section>
-
-              <section class="apartment-detail__block">
-                <h2>Sobre este espaço</h2>
                 <div class="apartment-detail__description">
                   <p>${apt.description}</p>
-                  <p class="apartment-detail__address">${apt.building}<br>${apt.address}</p>
+                  ${apt.building ? `<p class="apartment-detail__address">${apt.building}</p>` : ''}
                 </div>
               </section>
 
@@ -181,7 +219,7 @@ class RFApartmentDetail extends HTMLElement {
               </section>
 
               <section class="apartment-detail__block" id="avaliacoes">
-                <h2>${apt.rating.toFixed(1)} · ${hasReviews ? `${apt.reviewCount} avaliações` : 'Avaliações'}</h2>
+                <h2>${hasReviews ? `${apt.rating.toFixed(1)} · ${apt.reviewCount} avaliações` : 'Avaliações'}</h2>
                 ${hasReviews ? `
                   <ul class="apartment-detail__reviews">
                     ${SAMPLE_REVIEWS.map((r) => `
@@ -205,7 +243,7 @@ class RFApartmentDetail extends HTMLElement {
 
               <section class="apartment-detail__block" id="localizacao">
                 <h2>Onde você vai ficar</h2>
-                <p class="apartment-detail__muted">${apt.neighborhood}, Recife — Pernambuco</p>
+                <p class="apartment-detail__muted">${apt.neighborhood}, Recife — Pernambuco. Endereço exato após confirmação da reserva.</p>
                 <div class="apartment-detail__map">
                   <iframe
                     title="Mapa — ${apt.name}"
@@ -223,6 +261,11 @@ class RFApartmentDetail extends HTMLElement {
                     </li>
                   `).join('')}
                 </ul>
+                <p class="apartment-detail__map-links">
+                  <a href="${MAPS_LINKS.place}" target="_blank" rel="noopener noreferrer">Google Maps</a>
+                  <a href="${MAPS_LINKS.directions}" target="_blank" rel="noopener noreferrer">Como chegar</a>
+                  <a href="${MAPS_LINKS.waze}" target="_blank" rel="noopener noreferrer">Waze</a>
+                </p>
                 ${n ? `<a class="btn btn--secondary btn--sm" href="${pageHref(n.pageUrl)}">Ver mais em ${n.name}</a>` : ''}
               </section>
 
@@ -232,10 +275,7 @@ class RFApartmentDetail extends HTMLElement {
                   <div>
                     <h3>Regras da casa</h3>
                     <ul>
-                      <li>Check-in e check-out combinados na reserva</li>
-                      <li>Máximo de ${apt.guests} hóspedes</li>
-                      <li>Sem festas ou eventos</li>
-                      <li>${apt.petFriendly ? 'Pets sob pedido / combinado prévio' : 'Pets sob consulta'}</li>
+                      ${rules.map((r) => `<li>${r}</li>`).join('')}
                     </ul>
                   </div>
                   <div>
@@ -249,33 +289,76 @@ class RFApartmentDetail extends HTMLElement {
             <aside class="apartment-detail__aside" id="reserva">
               <div class="apartment-detail__booking">
                 <p class="apartment-detail__booking-price">
-                  <strong>${priceLabel}</strong>
-                  ${priceNote ? `<span>${priceNote}</span>` : ''}
+                  ${priceNight != null
+                    ? `<strong>${priceLabel}</strong><span>${priceNote}</span>`
+                    : `<strong class="apartment-detail__booking-price--consult">Sob consulta</strong>`}
                 </p>
+                ${hasReviews
+                  ? `<p class="apartment-detail__booking-rating">${apt.rating.toFixed(1)} · ${apt.reviewCount} avaliações</p>`
+                  : `<p class="apartment-detail__booking-rating">Reserva direta com a anfitriã</p>`}
+
                 <form class="apartment-detail__form" data-booking-form>
-                  <label>
-                    <span>Check-in</span>
-                    <input type="date" name="checkin" min="${minIn}" value="${minIn}" required data-checkin>
-                  </label>
-                  <label>
-                    <span>Check-out</span>
-                    <input type="date" name="checkout" min="${defaultOut}" value="${defaultOut}" required data-checkout>
-                  </label>
-                  <label>
-                    <span>Hóspedes</span>
-                    <select name="guests" data-guests>
-                      ${Array.from({ length: Math.max(apt.guests, 1) }, (_, i) => {
-                        const nGuests = i + 1;
-                        return `<option value="${nGuests}"${nGuests === Math.min(2, apt.guests) ? ' selected' : ''}>${nGuests}</option>`;
-                      }).join('')}
-                    </select>
-                  </label>
+                  <div class="apartment-detail__dates">
+                    <label>
+                      <span>Check-in</span>
+                      <input type="date" name="checkin" min="${minIn}" value="${minIn}" required data-checkin>
+                    </label>
+                    <label>
+                      <span>Check-out</span>
+                      <input type="date" name="checkout" min="${defaultOut}" value="${defaultOut}" required data-checkout>
+                    </label>
+                  </div>
+
+                  <div class="apartment-detail__guests">
+                    <label>
+                      <span>Adultos</span>
+                      <select name="adults" data-adults aria-label="Adultos">
+                        ${Array.from({ length: maxGuests }, (_, i) => {
+                          const v = i + 1;
+                          const selected = v === Math.min(2, maxGuests);
+                          return `<option value="${v}"${selected ? ' selected' : ''}>${v}</option>`;
+                        }).join('')}
+                      </select>
+                    </label>
+                    <label>
+                      <span>Crianças</span>
+                      <select name="children" data-children aria-label="Crianças">
+                        ${Array.from({ length: maxGuests }, (_, i) => `
+                          <option value="${i}"${i === 0 ? ' selected' : ''}>${i}</option>
+                        `).join('')}
+                      </select>
+                    </label>
+                  </div>
+                  <p class="apartment-detail__guest-hint">Máx. ${maxGuests} hóspedes · crianças contam na capacidade</p>
+
+                  <div class="apartment-detail__breakdown" data-breakdown ${priceNight == null ? 'hidden' : ''}>
+                    <div class="apartment-detail__price-row">
+                      <span data-line-nights>${priceLabel} × ${defaultNights} noites</span>
+                      <strong data-line-subtotal>${formatBRL(defaultSub)}</strong>
+                    </div>
+                    ${cleaningFee > 0 ? `
+                      <div class="apartment-detail__price-row">
+                        <span>Taxa de limpeza</span>
+                        <strong>${formatBRL(cleaningFee)}</strong>
+                      </div>
+                    ` : ''}
+                    <div class="apartment-detail__price-row apartment-detail__price-row--total">
+                      <span>Total estimado</span>
+                      <strong data-line-total>${formatBRL(defaultTotal)}</strong>
+                    </div>
+                  </div>
+
+                  <p class="apartment-detail__consult" data-consult ${priceNight != null ? 'hidden' : ''}>
+                    Valores sob consulta conforme datas e temporada. Envie sua solicitação no WhatsApp.
+                  </p>
+
                   <button type="submit" class="btn btn--primary apartment-detail__wa">
                     ${WHATSAPP_ICON_SVG}
-                    Reservar via WhatsApp
+                    Solicitar reserva
                   </button>
                 </form>
-                <p class="apartment-detail__notice">Você não será cobrado ainda — confirmamos pelo WhatsApp.</p>
+
+                <p class="apartment-detail__notice">Você não será cobrado ainda — confirmamos disponibilidade e valores no WhatsApp.</p>
                 <p class="apartment-detail__phone">
                   <a href="tel:${BUSINESS.phone}">${BUSINESS.phoneDisplay}</a>
                 </p>
@@ -298,28 +381,90 @@ class RFApartmentDetail extends HTMLElement {
       </article>
     `;
 
-    this._bind(apt, waBase);
+    this.#bindTabs();
+    this.#bindBooking(apt, priceNight, cleaningFee);
+    this.#bindGallery();
   }
 
-  _bind(apt, waBase) {
+  #bindTabs() {
+    const nav = this.querySelector('.apartment-detail__tabs');
+    if (!nav) return;
+    const links = [...nav.querySelectorAll('a')];
+    const sections = links
+      .map((a) => this.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    const setActive = () => {
+      const y = window.scrollY + 140;
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.offsetTop <= y) current = s;
+      }
+      links.forEach((a) => {
+        a.classList.toggle('is-active', Boolean(current && a.getAttribute('href') === `#${current.id}`));
+      });
+    };
+
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+  }
+
+  #bindBooking(apt, priceNight, cleaningFee) {
     const form = this.querySelector('[data-booking-form]');
     const checkin = this.querySelector('[data-checkin]');
     const checkout = this.querySelector('[data-checkout]');
-    const guests = this.querySelector('[data-guests]');
-    const modal = this.querySelector('[data-gallery-modal]');
+    const adults = this.querySelector('[data-adults]');
+    const children = this.querySelector('[data-children]');
+    const lineNights = this.querySelector('[data-line-nights]');
+    const lineSubtotal = this.querySelector('[data-line-subtotal]');
+    const lineTotal = this.querySelector('[data-line-total]');
+    const maxGuests = apt.guests || 2;
 
-    checkin?.addEventListener('change', () => {
-      if (!checkin.value || !checkout) return;
-      const minOut = addDaysISO(checkin.value, 1);
-      checkout.min = minOut;
-      if (!checkout.value || checkout.value <= checkin.value) checkout.value = minOut;
-    });
+    const update = () => {
+      if (!checkin || !checkout) return;
+      if (checkout.value <= checkin.value) {
+        checkout.value = addDaysISO(checkin.value, 1);
+      }
+      checkout.min = addDaysISO(checkin.value, 1);
+
+      let a = Number(adults?.value) || 1;
+      let c = Number(children?.value) || 0;
+      if (a + c > maxGuests) {
+        c = Math.max(0, maxGuests - a);
+        if (children) children.value = String(c);
+      }
+
+      const nights = nightsBetween(checkin.value, checkout.value);
+      if (priceNight != null && lineNights && lineSubtotal && lineTotal) {
+        const sub = priceNight * nights;
+        lineNights.textContent = `${apt.priceFrom} × ${nights} noite${nights === 1 ? '' : 's'}`;
+        lineSubtotal.textContent = formatBRL(sub);
+        lineTotal.textContent = formatBRL(sub + cleaningFee);
+      }
+    };
+
+    form?.addEventListener('change', update);
+    form?.addEventListener('input', update);
+    update();
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
-      const msg = `${waBase} Check-in: ${checkin?.value || 'a combinar'}. Check-out: ${checkout?.value || 'a combinar'}. Hóspedes: ${guests?.value || '2'}.`;
+      const nights = nightsBetween(checkin.value, checkout.value);
+      const a = Number(adults?.value) || 1;
+      const c = Number(children?.value) || 0;
+      const guests = a + c;
+      let msg = `Olá! Quero reservar o ${apt.name}.\nCheck-in: ${checkin.value}\nCheck-out: ${checkout.value}\nNoites: ${nights}\nHóspedes: ${guests} (${a} adulto${a > 1 ? 's' : ''}${c ? `, ${c} criança${c > 1 ? 's' : ''}` : ''})`;
+      if (priceNight != null) {
+        msg += `\nTotal estimado: ${formatBRL(priceNight * nights + cleaningFee)}`;
+      } else {
+        msg += `\nValor: sob consulta`;
+      }
       window.open(whatsappUrl(msg), '_blank', 'noopener,noreferrer');
     });
+  }
+
+  #bindGallery() {
+    const modal = this.querySelector('[data-gallery-modal]');
 
     this.querySelector('[data-gallery-open]')?.addEventListener('click', () => {
       if (!modal) return;
@@ -335,6 +480,13 @@ class RFApartmentDetail extends HTMLElement {
 
     modal?.addEventListener('click', (e) => {
       if (e.target === modal) {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.hidden) {
         modal.hidden = true;
         document.body.style.overflow = '';
       }
