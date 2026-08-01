@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="./styles/components/footer.css" />
   <link rel="stylesheet" href="./styles/components/floating-whatsapp.css" />
   <link rel="stylesheet" href="./styles/components/matching.css" />
+  <link rel="stylesheet" href="./styles/components/beach-decor.css" />
   <link rel="stylesheet" href="./styles/pages/apartamentos.css" />
 </head>
 <body>
@@ -34,7 +35,7 @@
   <rf-menu wraps=".site-content"></rf-menu>
 
   <div class="site-content">
-    <rf-announcement>🌴 <strong>Reserve direto</strong> — atendimento rápido pelo WhatsApp</rf-announcement>
+    <rf-announcement><strong>Reserve direto</strong> — atendimento rápido pelo WhatsApp</rf-announcement>
     <rf-navbar></rf-navbar>
 
     <main>
@@ -44,19 +45,23 @@
         </div>
       </div>
 
-      <section class="page-header">
+      <section class="listings-shell">
+        <rf-page-beach motifs="starfish,shell,surfboards,sun" variant="soft"></rf-page-beach>
+
+        <header class="page-header">
+          <div class="container">
+            <span class="eyebrow">Nossa coleção</span>
+            <h1>Apartamentos para <em class="display-italic">temporada</em> em Recife</h1>
+            <p class="page-header__lead">
+              Quatro imóveis mobiliados em Boa Viagem e Pina. Compare localização, estrutura e preço — e reserve direto conosco.
+            </p>
+          </div>
+        </header>
+
         <div class="container">
-          <span class="eyebrow">Nossa coleção</span>
-          <h1>Apartamentos para <em class="display-italic">temporada</em> em Recife</h1>
-          <p class="page-header__lead">
-            Quatro imóveis mobiliados em Boa Viagem e Pina. Compare localização, estrutura e preço — e reserve direto conosco.
-          </p>
+          <rf-apartments-hub></rf-apartments-hub>
         </div>
       </section>
-
-      <div class="container">
-        <rf-apartments-hub></rf-apartments-hub>
-      </div>
     </main>
 
     <rf-footer></rf-footer>

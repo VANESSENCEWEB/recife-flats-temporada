@@ -78,3 +78,15 @@
 main {
   padding-bottom: clamp(2rem, 5vw, 4rem);
 }
+
+.listings-shell {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.listings-shell > .page-header,
+.listings-shell > .container {
+  position: relative;
+  z-index: 1;
+}

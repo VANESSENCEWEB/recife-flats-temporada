@@ -21,3 +21,4 @@ import "./components/location-section.js";
 import "./components/testimonials-section.js";
 import "./components/faq-section.js";
 import "./components/booking-promo.js";
+import "./components/page-beach.js";

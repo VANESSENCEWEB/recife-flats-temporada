@@ -6,6 +6,7 @@
  */
 
 import { getNeighborhood } from '../data/site-structure.js';
+import { beachDecorLayer } from '../data/beach-decor.js';
 import './apartments-hub.js';
 
 class RFNeighborhoodHub extends HTMLElement {
@@ -18,8 +19,13 @@ class RFNeighborhoodHub extends HTMLElement {
       return;
     }
 
+    const motifs = slug === 'pina'
+      ? ['shell', 'surfboards', 'sun']
+      : ['starfish', 'surfboards', 'sun'];
+
     this.innerHTML = `
       <section class="neighborhood-hub">
+        ${beachDecorLayer(motifs, 'soft')}
         <header class="page-header">
           <div class="container">
             <span class="eyebrow">Bairro</span>

@@ -12,6 +12,7 @@ import {
 import { getNeighborhood, pageHref } from '../data/site-structure.js';
 import { BUSINESS, MAPS_EMBED_URL, MAPS_LINKS, whatsappUrl } from '../data/location.js';
 import { WHATSAPP_ICON_SVG } from '../data/brand-icons.js';
+import { beachDecorLayer } from '../data/beach-decor.js';
 
 function pictureHtml(src, alt, eager = false) {
   const loading = eager ? 'eager' : 'lazy';
@@ -94,8 +95,13 @@ class RFApartmentDetail extends HTMLElement {
     const nearby = nearbyFor(apt);
     const hasReviews = apt.reviewCount > 0;
 
+    const decorMotifs = apt.neighborhoodSlug === 'pina'
+      ? ['shell', 'surfboards', 'sun']
+      : ['starfish', 'shell', 'surfboards'];
+
     this.innerHTML = `
       <article class="apartment-detail">
+        ${beachDecorLayer(decorMotifs, 'soft')}
         <nav class="apartment-detail__tabs" aria-label="Seções do imóvel">
           <div class="container apartment-detail__tabs-inner">
             <a href="#visao-geral">Visão geral</a>

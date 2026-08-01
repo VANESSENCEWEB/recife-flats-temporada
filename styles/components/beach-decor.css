@@ -1,0 +1,147 @@
+/* ============================================================
+   BEACH DECOR — contornos hand-drawn (estrela, concha, sol, pranchas)
+============================================================ */
+
+.has-beach-decor,
+.home-section,
+.neighborhood-hub,
+.listings-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.apartment-detail {
+  position: relative;
+}
+
+.has-beach-decor > .container,
+.home-section > .container,
+.neighborhood-hub > .container,
+.neighborhood-hub > .page-header,
+.listings-shell > .container,
+.listings-shell > .page-header,
+.apartment-detail > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.beach-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  color: var(--orla-400);
+}
+
+.beach-decor__motif {
+  position: absolute;
+  opacity: 0.18;
+  color: inherit;
+}
+
+.beach-decor__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.beach-decor__motif--a {
+  top: 6%;
+  left: 2%;
+  width: clamp(7.5rem, 15vw, 12rem);
+  transform: rotate(-8deg);
+  animation: beach-float-a 18s ease-in-out infinite;
+}
+
+.beach-decor__motif--starfish {
+  color: var(--orla-400);
+  opacity: 0.22;
+}
+
+.beach-decor__motif--b {
+  bottom: 5%;
+  right: 3%;
+  width: clamp(6.5rem, 13vw, 10.5rem);
+  transform: rotate(12deg);
+  animation: beach-float-b 22s ease-in-out infinite;
+}
+
+.beach-decor__motif--shell {
+  color: var(--sol-500);
+  opacity: 0.2;
+}
+
+.beach-decor__motif--c,
+.beach-decor__motif--sun.beach-decor__motif--a {
+  top: 18%;
+  left: -0.5rem;
+  width: clamp(6rem, 12vw, 9.5rem);
+  transform: none;
+  animation: beach-float-c 26s ease-in-out infinite;
+}
+
+.beach-decor__motif--sun {
+  color: var(--sol-400);
+  opacity: 0.18;
+  left: -0.35rem;
+  top: 22%;
+  width: clamp(7rem, 13vw, 10rem);
+  transform: none;
+}
+
+.beach-decor__motif--wave {
+  color: var(--orla-400);
+  opacity: 0.14;
+}
+
+.beach-decor__motif--palm {
+  color: var(--orla-500);
+  opacity: 0.14;
+  width: clamp(4.5rem, 9vw, 7rem);
+}
+
+.beach-decor__motif--surfboards {
+  color: #C4A484;
+  opacity: 0.22;
+  left: 2%;
+  right: auto;
+  bottom: 4%;
+  top: auto;
+  width: clamp(6.5rem, 12vw, 9.5rem);
+  transform: none;
+}
+
+.beach-decor--soft .beach-decor__motif { opacity: 0.2; }
+.beach-decor--ink .beach-decor__motif--starfish { opacity: 0.12; color: var(--orla-600); }
+.beach-decor--ink .beach-decor__motif--shell { opacity: 0.12; color: var(--sol-600); }
+.beach-decor--sun .beach-decor__motif--sun { opacity: 0.2; }
+.beach-decor--sun .beach-decor__motif--shell { opacity: 0.16; }
+
+@keyframes beach-float-a {
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50% { transform: rotate(-4deg) translateY(-8px); }
+}
+@keyframes beach-float-b {
+  0%, 100% { transform: rotate(12deg) translateY(0); }
+  50% { transform: rotate(8deg) translateY(8px); }
+}
+@keyframes beach-float-c {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beach-decor__motif {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .beach-decor__motif--wave,
+  .beach-decor__motif--palm { display: none; }
+  .beach-decor__motif--a { width: 6.25rem; opacity: 0.16; }
+  .beach-decor__motif--b { width: 5.5rem; opacity: 0.15; }
+  .beach-decor__motif--sun { width: 5.75rem; opacity: 0.14; }
+  .beach-decor__motif--surfboards { width: 5.75rem; opacity: 0.16; }
+}

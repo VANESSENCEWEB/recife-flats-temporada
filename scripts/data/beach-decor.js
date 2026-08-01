@@ -175,7 +175,7 @@ const PLACEMENTS = [
 ];
 
 /**
- * @param {Array<'starfish'|'shell'|'sun'|'wave'|'palm'>} motifs
+ * @param {Array<'starfish'|'shell'|'sun'|'wave'|'palm'|'surfboards'>} motifs
  * @param {string} [variant]
  */
 export function beachDecorLayer(motifs = ['starfish', 'shell', 'sun'], variant = '') {

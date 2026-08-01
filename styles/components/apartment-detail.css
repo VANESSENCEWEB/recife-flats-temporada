@@ -4,6 +4,11 @@
 
 rf-apartment-detail { display: block; }
 
+.apartment-detail {
+  position: relative;
+  /* sem overflow:hidden — senão as abas sticky quebram */
+}
+
 .apartment-detail__tabs {
   position: sticky;
   top: calc(var(--announcement-height, 0px) + var(--nav-height));
