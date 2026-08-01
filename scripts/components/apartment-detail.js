@@ -331,26 +331,28 @@ class RFApartmentDetail extends HTMLElement {
                   </div>
                   <p class="apartment-detail__guest-hint">Máx. ${maxGuests} hóspedes · crianças contam na capacidade</p>
 
-                  <div class="apartment-detail__breakdown" data-breakdown ${priceNight == null ? 'hidden' : ''}>
-                    <div class="apartment-detail__price-row">
-                      <span data-line-nights>${priceLabel} × ${defaultNights} noites</span>
-                      <strong data-line-subtotal>${formatBRL(defaultSub)}</strong>
-                    </div>
-                    ${cleaningFee > 0 ? `
+                  ${priceNight != null ? `
+                    <div class="apartment-detail__breakdown" data-breakdown>
                       <div class="apartment-detail__price-row">
-                        <span>Taxa de limpeza</span>
-                        <strong>${formatBRL(cleaningFee)}</strong>
+                        <span data-line-nights>${priceLabel} × ${defaultNights} noites</span>
+                        <strong data-line-subtotal>${formatBRL(defaultSub)}</strong>
                       </div>
-                    ` : ''}
-                    <div class="apartment-detail__price-row apartment-detail__price-row--total">
-                      <span>Total estimado</span>
-                      <strong data-line-total>${formatBRL(defaultTotal)}</strong>
+                      ${cleaningFee > 0 ? `
+                        <div class="apartment-detail__price-row">
+                          <span>Taxa de limpeza</span>
+                          <strong>${formatBRL(cleaningFee)}</strong>
+                        </div>
+                      ` : ''}
+                      <div class="apartment-detail__price-row apartment-detail__price-row--total">
+                        <span>Total estimado</span>
+                        <strong data-line-total>${formatBRL(defaultTotal)}</strong>
+                      </div>
                     </div>
-                  </div>
-
-                  <p class="apartment-detail__consult" data-consult ${priceNight != null ? 'hidden' : ''}>
-                    Valores sob consulta conforme datas e temporada. Envie sua solicitação no WhatsApp.
-                  </p>
+                  ` : `
+                    <p class="apartment-detail__consult">
+                      Valores sob consulta conforme datas e temporada. Envie sua solicitação no WhatsApp.
+                    </p>
+                  `}
 
                   <button type="submit" class="btn btn--primary apartment-detail__wa">
                     ${WHATSAPP_ICON_SVG}
