@@ -44,9 +44,9 @@
   --site-chrome-height: var(--nav-height);
 }
 
-/* Chrome fixo no topo (announcement + navbar) — não usar sticky
-   dentro de .site-content (transform do menu quebra sticky). */
-.site-content--home-full .site-chrome {
+/* Chrome fixo FORA do .site-content — não some no scroll
+   (avoid containing-block de transform do menu). */
+.site-chrome--fixed {
   position: fixed;
   top: 0;
   left: 0;
@@ -55,14 +55,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  pointer-events: none;
 }
 
-.site-content--home-full .site-chrome > * {
-  pointer-events: auto;
-}
-
-.site-content--home-full .announcement {
+.site-chrome--fixed .announcement {
   position: relative;
   top: auto;
   left: auto;
@@ -79,13 +74,13 @@
   box-sizing: border-box;
 }
 
-.site-content--home-full rf-navbar {
+.site-chrome--fixed rf-navbar {
   height: auto;
   flex-shrink: 0;
   margin: 0;
 }
 
-.site-content--home-full .navbar {
+.site-chrome--fixed .navbar {
   position: relative;
   top: auto !important;
   left: auto;
@@ -95,8 +90,8 @@
   border: none;
 }
 
-.site-content--home-full .navbar.is-scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+.site-chrome--fixed .navbar.is-scrolled {
+  box-shadow: 0 4px 20px rgba(10, 31, 50, 0.22);
 }
 
 .site-content--home-full .hero {
@@ -131,7 +126,7 @@
 }
 
 @media (max-width: 480px) {
-  .site-content--home-full .announcement {
+  .site-chrome--fixed .announcement {
     min-height: var(--announcement-height-mobile);
     max-height: var(--announcement-height-mobile);
   }
@@ -196,7 +191,7 @@ rf-booking-promo {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--mangue-600);
+  color: var(--orla-600);
 }
 
 .home-section__header {
@@ -217,7 +212,7 @@ rf-booking-promo {
 .home-section__header h2 em {
   font-style: italic;
   font-weight: 400;
-  color: var(--mangue-600);
+  color: var(--orla-600);
 }
 
 .home-section__header p {
@@ -237,7 +232,7 @@ rf-booking-promo {
 /* ---- Marquee ---- */
 .home-marquee {
   overflow: hidden;
-  background: var(--mangue-900);
+  background: var(--orla-900);
   color: rgba(255, 251, 244, 0.88);
   border-block: 1px solid rgba(255, 251, 244, 0.08);
   padding-block: 0.85rem;
@@ -299,7 +294,7 @@ rf-booking-promo {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.4vw, 2rem);
   font-weight: 500;
-  color: var(--mangue-700);
+  color: var(--orla-700);
   line-height: 1;
 }
 
@@ -529,7 +524,7 @@ rf-booking-promo {
 }
 
 .location-section__benefit a {
-  color: var(--mangue-700);
+  color: var(--orla-700);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.15em;
@@ -542,7 +537,7 @@ rf-booking-promo {
 
 .location-section__benefit[data-neighborhood="pina"] h3,
 .location-section__benefit[data-neighborhood="pina"] a {
-  color: var(--mangue-700);
+  color: var(--mangue-600);
 }
 
 .location-section__map {
@@ -564,7 +559,7 @@ rf-booking-promo {
 .location-section__map-link {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--mangue-700);
+  color: var(--orla-700);
 }
 
 @media (max-width: 900px) {
@@ -651,7 +646,7 @@ rf-booking-promo {
   content: "+";
   font-family: var(--font-mono);
   font-size: 1.1rem;
-  color: var(--mangue-600);
+  color: var(--orla-600);
   flex-shrink: 0;
 }
 
@@ -669,7 +664,7 @@ rf-booking-promo {
 /* ---- Booking promo ---- */
 .booking-promo {
   background:
-    linear-gradient(160deg, var(--agua-700) 0%, var(--mangue-800) 45%, var(--mangue-1000) 100%);
+    linear-gradient(160deg, var(--orla-600) 0%, var(--orla-800) 45%, var(--orla-1000) 100%);
   color: rgba(255, 251, 244, 0.92);
   padding-block: clamp(4.5rem, 8vw, 7rem);
 }

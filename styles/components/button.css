@@ -45,13 +45,13 @@
 }
 
 .btn--secondary {
-  background: var(--mangue-600);
+  background: var(--orla-600);
   color: var(--paper);
-  box-shadow: 0 6px 16px rgba(51, 81, 63, 0.28);
+  box-shadow: 0 6px 16px rgba(31, 103, 153, 0.28);
 }
 
 .btn--secondary:hover {
-  background: var(--mangue-800);
+  background: var(--orla-800);
 }
 
 .btn--ghost {

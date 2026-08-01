@@ -35,7 +35,7 @@
 .display-italic {
   font-style: italic;
   font-weight: 500;
-  color: var(--theme-accent, var(--mangue-600));
+  color: var(--theme-accent, var(--orla-600));
 }
 
 [data-theme="boa-viagem"] .site-content {

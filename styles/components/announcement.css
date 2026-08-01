@@ -5,7 +5,7 @@
 rf-announcement { display: block; }
 
 .announcement {
-  background: var(--mangue-800);
+  background: var(--orla-900);
   color: var(--paper);
   min-height: var(--announcement-height, 40px);
   display: flex;

@@ -62,9 +62,9 @@
   --sand-900:     #5C4F41;
   --sand-1000:    #453A2F;
   --sand-1100:    #332A22;
-  --ink:          #243028;  /* verde-escuro suave, não marrom pesado */
-  --ink-soft:     #5A6A60;
-  --line:         rgba(36, 48, 40, 0.12);
+  --ink:          #1C2A36;  /* azul-areia (praia), não mangue */
+  --ink-soft:     #5A6B78;
+  --line:         rgba(28, 42, 54, 0.12);
 
   /* terracota fica só como apoio (não manda mais no visual) */
   --terracotta-100: #FDF1EC;
@@ -82,22 +82,23 @@
   --gold-dark:    var(--sol-600);
 
 
-  /* ---------- ALIASES (pra o site atual continuar funcionando) ---------- */
+  /* ---------- ALIASES — marca praia: azul orla + sol/areia ---------- */
   --areia:         var(--sand-200);
   --areia-escura:  var(--sand-300);
-  --mare:          var(--mangue-600);
-  --mare-escuro:   var(--mangue-800);
-  --mare-claro:    var(--mangue-500);
-  --tijolo:        var(--sol-500);       /* botões passam a “sol” */
+  --mare:          var(--orla-600);
+  --mare-escuro:   var(--orla-800);
+  --mare-claro:    var(--orla-500);
+  --mare-text-soft: rgba(255, 251, 244, 0.72);
+  --tijolo:        var(--sol-500);
   --tijolo-escuro: var(--sol-700);
-  --coco:          var(--mangue-600);
+  --coco:          var(--orla-600);
   --sol:           var(--sol-400);
   --tinta:         var(--ink);
   --branco:        var(--paper);
   --cream:         var(--sand-200);
   --cream-dark:    var(--sand-300);
-  --ocean:         var(--mangue-600);
-  --ocean-light:   var(--mangue-500);
+  --ocean:         var(--orla-600);
+  --ocean-light:   var(--orla-500);
   --clay:          var(--sol-500);
   --clay-light:    var(--sol-700);
   --sand:          var(--sol-300);
@@ -108,14 +109,14 @@
   --text:          var(--ink);
   --text-muted:    var(--ink-soft);
   --white:         var(--paper);
-  --black:         var(--mangue-900);
-  --accent:        var(--sol-500);       /* CTA principal = sol */
+  --black:         var(--orla-900);
+  --accent:        var(--sol-500);       /* CTA = sol / amarelo praia */
   --accent-soft:   var(--sol-200);
-  --accent-dark:   var(--mangue-600);
-  --accent-darker: var(--mangue-800);
-  --brand-blue:    var(--agua-500);      /* toque de orla */
-  --sky-soft:      var(--agua-100);
-  --sky-mid:       var(--agua-300);
+  --accent-dark:   var(--orla-600);
+  --accent-darker: var(--orla-800);
+  --brand-blue:    var(--orla-500);
+  --sky-soft:      var(--orla-100);
+  --sky-mid:       var(--orla-300);
 
 
   /* ---------- TIPOGRAFIA ---------- */
@@ -207,11 +208,11 @@
   --fs-section-title: clamp(1.75rem, 3.2vw, 2.875rem);
   --fs-section-lead: 1.05rem;
 
-  /* Tema semântico por bairro (padrão = marca / Pina) */
-  --theme-accent: var(--mangue-600);
-  --theme-accent-soft: var(--mangue-100);
-  --theme-accent-deep: var(--mangue-800);
-  --theme-surface: var(--mangue-1000);
+  /* Tema semântico por bairro (padrão = praia / orla) */
+  --theme-accent: var(--orla-600);
+  --theme-accent-soft: var(--orla-100);
+  --theme-accent-deep: var(--orla-800);
+  --theme-surface: var(--orla-1000);
 }
 
 /* Boa Viagem — azul orla (praia), sem trocar a marca global */
