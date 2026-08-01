@@ -2,9 +2,26 @@
    PÁGINAS DE LISTAGEM — apartamentos / bairros
 ============================================================ */
 
+/* Espaço sob announcement + navbar fixos (senão o breadcrumb some) */
 .page-shell__breadcrumbs {
-  padding-top: 1.25rem;
-  padding-bottom: 0.25rem;
+  padding-top: calc(var(--nav-height) + var(--space-4));
+  padding-bottom: var(--space-2);
+}
+
+.site-content:has(.announcement) .page-shell__breadcrumbs,
+.site-content:has(rf-announcement) .page-shell__breadcrumbs {
+  padding-top: calc(var(--announcement-height) + var(--nav-height) + var(--space-4));
+}
+
+@media (max-width: 600px) {
+  .page-shell__breadcrumbs {
+    padding-top: calc(var(--nav-height-mobile) + var(--space-3));
+  }
+
+  .site-content:has(.announcement) .page-shell__breadcrumbs,
+  .site-content:has(rf-announcement) .page-shell__breadcrumbs {
+    padding-top: calc(var(--announcement-height-mobile) + var(--nav-height-mobile) + var(--space-3));
+  }
 }
 
 .page-header {
