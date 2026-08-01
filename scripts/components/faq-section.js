@@ -2,6 +2,8 @@
  * <rf-faq-section> — Perguntas frequentes.
  */
 
+import { beachDecorLayer } from '../data/beach-decor.js';
+
 class RFFaqSection extends HTMLElement {
   connectedCallback() {
     const faqs = [

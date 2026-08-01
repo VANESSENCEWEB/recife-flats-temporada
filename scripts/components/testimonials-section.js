@@ -3,6 +3,7 @@
  */
 
 import { FALLBACK_REVIEWS, MAPS_LINKS } from '../data/location.js';
+import { beachDecorLayer } from '../data/beach-decor.js';
 
 class RFTestimonialsSection extends HTMLElement {
   connectedCallback() {
