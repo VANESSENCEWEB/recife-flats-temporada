@@ -1,0 +1,7 @@
+/* ============================================================
+   DESIGN SYSTEM — helpers de página (listagens)
+============================================================ */
+
+.page-shell__breadcrumbs .container {
+  max-width: var(--container, 1120px);
+}

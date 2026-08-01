@@ -1,0 +1,93 @@
+/* ============================================================
+   APARTMENTS HUB / NEIGHBORHOOD
+============================================================ */
+
+rf-apartments-hub,
+rf-neighborhood-hub { display: block; }
+
+.apartments-hub__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.15rem;
+  background: var(--sand-200);
+  border-radius: 14px;
+}
+
+.apartments-hub__field {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.apartments-hub__field select {
+  min-width: 10rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+
+.apartments-hub__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.apartments-hub__count {
+  margin: 0 0 1.25rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.apartments-hub__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.apartments-hub__empty {
+  margin: 2rem 0 0;
+  color: var(--ink-soft);
+}
+
+.neighborhood-hub__highlights {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  max-width: 48ch;
+}
+
+.neighborhood-hub__highlights li {
+  position: relative;
+  padding-left: 1.15rem;
+  color: var(--ink-soft);
+}
+
+.neighborhood-hub__highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--sol-500);
+}
+
+@media (max-width: 800px) {
+  .apartments-hub__grid {
+    grid-template-columns: 1fr;
+  }
+}
