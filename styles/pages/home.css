@@ -190,19 +190,19 @@ rf-booking-promo {
   z-index: 1;
 }
 
-/* Contornos de praia no fundo das seções */
+/* Contornos hand-drawn de praia (estrela, concha, sol) */
 .beach-decor {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  color: var(--orla-500);
+  color: var(--orla-400);
 }
 
 .beach-decor__motif {
   position: absolute;
-  opacity: 0.14;
+  opacity: 0.18;
   color: inherit;
 }
 
@@ -212,55 +212,81 @@ rf-booking-promo {
   height: auto;
 }
 
+/* Estrela / item A — canto superior (ciano orla) */
 .beach-decor__motif--a {
-  top: 8%;
-  right: 4%;
-  width: clamp(7rem, 14vw, 11rem);
-  transform: rotate(12deg);
+  top: 6%;
+  left: 2%;
+  width: clamp(7.5rem, 15vw, 12rem);
+  transform: rotate(-8deg);
   animation: beach-float-a 18s ease-in-out infinite;
 }
 
+.beach-decor__motif--starfish {
+  color: var(--orla-400);
+  opacity: 0.22;
+}
+
+/* Concha — canto inferior (amarelo areia) */
 .beach-decor__motif--b {
-  bottom: 6%;
-  left: 3%;
-  width: clamp(5.5rem, 11vw, 8.5rem);
-  transform: rotate(-8deg);
+  bottom: 5%;
+  right: 3%;
+  width: clamp(6.5rem, 13vw, 10.5rem);
+  transform: rotate(12deg);
   animation: beach-float-b 22s ease-in-out infinite;
 }
 
-.beach-decor__motif--c {
-  top: 42%;
-  right: 18%;
-  width: clamp(6rem, 12vw, 10rem);
-  opacity: 0.1;
-  transform: rotate(-4deg);
+.beach-decor__motif--shell {
+  color: var(--sol-500);
+  opacity: 0.2;
+}
+
+/* Sol metade — encostado na lateral */
+.beach-decor__motif--c,
+.beach-decor__motif--sun.beach-decor__motif--a {
+  top: 18%;
+  left: -0.5rem;
+  width: clamp(6rem, 12vw, 9.5rem);
+  transform: none;
   animation: beach-float-c 26s ease-in-out infinite;
 }
 
-.beach-decor__motif--palm.beach-decor__motif--b {
-  width: clamp(4.5rem, 9vw, 7rem);
-  bottom: 4%;
-  left: 5%;
+.beach-decor__motif--sun {
+  color: var(--sol-400);
+  opacity: 0.18;
+  left: -0.35rem;
+  top: 22%;
+  width: clamp(7rem, 13vw, 10rem);
+  transform: none;
 }
 
-.beach-decor--soft { color: var(--orla-400); }
-.beach-decor--soft .beach-decor__motif { opacity: 0.16; }
-.beach-decor--ink { color: var(--ink); }
-.beach-decor--ink .beach-decor__motif { opacity: 0.07; }
-.beach-decor--sun { color: var(--sol-500); }
-.beach-decor--sun .beach-decor__motif { opacity: 0.12; }
+.beach-decor__motif--wave {
+  color: var(--orla-400);
+  opacity: 0.14;
+}
+
+.beach-decor__motif--palm {
+  color: var(--orla-500);
+  opacity: 0.14;
+  width: clamp(4.5rem, 9vw, 7rem);
+}
+
+.beach-decor--soft .beach-decor__motif { opacity: 0.2; }
+.beach-decor--ink .beach-decor__motif--starfish { opacity: 0.12; color: var(--orla-600); }
+.beach-decor--ink .beach-decor__motif--shell { opacity: 0.12; color: var(--sol-600); }
+.beach-decor--sun .beach-decor__motif--sun { opacity: 0.2; }
+.beach-decor--sun .beach-decor__motif--shell { opacity: 0.16; }
 
 @keyframes beach-float-a {
-  0%, 100% { transform: rotate(12deg) translateY(0); }
-  50% { transform: rotate(16deg) translateY(-10px); }
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50% { transform: rotate(-4deg) translateY(-8px); }
 }
 @keyframes beach-float-b {
-  0%, 100% { transform: rotate(-8deg) translateY(0); }
-  50% { transform: rotate(-4deg) translateY(8px); }
+  0%, 100% { transform: rotate(12deg) translateY(0); }
+  50% { transform: rotate(8deg) translateY(8px); }
 }
 @keyframes beach-float-c {
-  0%, 100% { transform: rotate(-4deg) translateX(0); }
-  50% { transform: rotate(2deg) translateX(8px); }
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -270,9 +296,11 @@ rf-booking-promo {
 }
 
 @media (max-width: 700px) {
-  .beach-decor__motif--c { display: none; }
-  .beach-decor__motif--a { opacity: 0.11; width: 6.5rem; }
-  .beach-decor__motif--b { opacity: 0.1; }
+  .beach-decor__motif--wave,
+  .beach-decor__motif--palm { display: none; }
+  .beach-decor__motif--a { width: 6.25rem; opacity: 0.16; }
+  .beach-decor__motif--b { width: 5.5rem; opacity: 0.15; }
+  .beach-decor__motif--sun { width: 5.75rem; opacity: 0.14; }
 }
 
 .home-section .eyebrow,

@@ -31,7 +31,7 @@ class RFFaqSection extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section faq-section" id="faq" aria-labelledby="faq-title">
-        ${beachDecorLayer(['starfish', 'palm', 'wave'], 'soft')}
+        ${beachDecorLayer(['starfish', 'shell', 'sun'], 'soft')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Dúvidas</span>

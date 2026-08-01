@@ -17,7 +17,7 @@ class RFAmenitiesSection extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section amenities-section" aria-labelledby="amenities-title">
-        ${beachDecorLayer(['shell', 'wave', 'sun'], 'soft')}
+        ${beachDecorLayer(['shell', 'starfish', 'sun'], 'soft')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Estrutura</span>

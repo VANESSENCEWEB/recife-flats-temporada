@@ -23,7 +23,7 @@ class RFWhyChooseSection extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section why-choose" aria-labelledby="why-choose-title">
-        ${beachDecorLayer(['palm', 'starfish', 'shell'], 'ink')}
+        ${beachDecorLayer(['starfish', 'shell', 'sun'], 'ink')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Por que nós</span>

@@ -24,7 +24,7 @@ class RFTestimonialsSection extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section testimonials" aria-labelledby="testimonials-title">
-        ${beachDecorLayer(['sun', 'shell', 'wave'], 'sun')}
+        ${beachDecorLayer(['sun', 'shell', 'starfish'], 'sun')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Quem já ficou</span>

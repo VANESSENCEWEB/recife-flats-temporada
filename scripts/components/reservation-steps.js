@@ -26,7 +26,7 @@ class RFReservationSteps extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section reservation-steps" aria-labelledby="reservation-steps-title">
-        ${beachDecorLayer(['starfish', 'palm', 'wave'], 'soft')}
+        ${beachDecorLayer(['starfish', 'shell', 'sun'], 'soft')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Simples e direto</span>

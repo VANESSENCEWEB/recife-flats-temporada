@@ -13,7 +13,7 @@ class RFApartmentsTeaser extends HTMLElement {
 
     this.innerHTML = `
       <section class="home-section apartments-teaser" id="apartamentos" aria-labelledby="apartments-teaser-title">
-        ${beachDecorLayer(['wave', 'starfish'], 'ink')}
+        ${beachDecorLayer(['starfish', 'shell'], 'ink')}
         <div class="container">
           <header class="home-section__header">
             <span class="eyebrow">Nossa coleção</span>
