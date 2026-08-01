@@ -72,68 +72,178 @@ rf-apartment-detail { display: block; }
   line-height: 1.5;
 }
 
-/* Gallery */
-.apartment-detail__gallery {
-  position: relative;
+/* Slideshow gallery — autoplay ~2.8s, efeito “vídeo” com fotos */
+.apt-slideshow {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 0.55rem;
-  height: clamp(18rem, 42vw, 28rem);
-  margin-bottom: 0;
+  gap: 0.7rem;
 }
 
-.apartment-detail__shot {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
+.apt-slideshow__stage {
+  position: relative;
+  height: clamp(18rem, 48vw, 30rem);
+  border-radius: 16px;
   overflow: hidden;
-  border-radius: 14px;
   background: var(--sand-300);
-  min-height: 0;
-  cursor: pointer;
-  color: inherit;
+  isolation: isolate;
 }
 
-.apartment-detail__shot--main {
-  grid-row: span 2;
+.apt-slideshow__track {
+  position: absolute;
+  inset: 0;
+  cursor: zoom-in;
 }
 
-.apartment-detail__shot picture,
-.apartment-detail__shot img {
+.apt-slideshow__slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+  z-index: 0;
+}
+
+.apt-slideshow__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.apt-slideshow__slide picture,
+.apt-slideshow__slide img {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.apartment-detail__shot img {
+.apt-slideshow__slide img {
   object-fit: cover;
-  transition: transform 0.35s ease;
+  transform: scale(1.04);
 }
 
-.apartment-detail__shot:hover img {
-  transform: scale(1.03);
+.apt-slideshow__slide.is-active img {
+  animation: apt-kenburns 2.8s ease-out forwards;
 }
 
-.apartment-detail__show-all {
+@keyframes apt-kenburns {
+  from { transform: scale(1.04); }
+  to { transform: scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apt-slideshow__slide {
+    transition: none;
+  }
+
+  .apt-slideshow__slide.is-active img,
+  .apt-slideshow__slide img {
+    animation: none;
+    transform: none;
+  }
+}
+
+.apt-slideshow__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 251, 244, 0.92);
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(14, 43, 67, 0.16);
+}
+
+.apt-slideshow__nav--prev { left: 0.85rem; }
+.apt-slideshow__nav--next { right: 0.85rem; }
+
+.apt-slideshow__nav:hover {
+  background: #fff;
+}
+
+.apt-slideshow__ui {
   position: absolute;
   right: 0.85rem;
   bottom: 0.85rem;
-  z-index: 2;
-  padding: 0.65rem 0.95rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 251, 244, 0.35);
-  background: rgba(14, 43, 67, 0.88);
-  color: var(--paper);
-  font-size: 0.82rem;
-  font-weight: 600;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
-.apartment-detail__show-all:hover {
+.apt-slideshow__count,
+.apt-slideshow__toggle,
+.apt-slideshow__all {
+  border: 0;
+  border-radius: 999px;
+  background: rgba(14, 43, 67, 0.88);
+  color: var(--paper);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.55rem 0.8rem;
+}
+
+.apt-slideshow__toggle {
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+.apt-slideshow__all {
+  cursor: pointer;
+}
+
+.apt-slideshow__all:hover,
+.apt-slideshow__toggle:hover {
   background: rgba(14, 43, 67, 0.96);
+}
+
+.apt-slideshow__thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(4.5rem, 1fr));
+  gap: 0.45rem;
+}
+
+.apt-slideshow__thumb {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--sand-300);
+  cursor: pointer;
+}
+
+.apt-slideshow__thumb.is-active {
+  border-color: var(--orla-600);
+}
+
+.apt-slideshow__thumb picture,
+.apt-slideshow__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.apt-slideshow__thumb--more {
+  display: grid;
+  place-items: center;
+  background: rgba(14, 43, 67, 0.9);
+  color: var(--paper);
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 
 /* Tabs — abaixo da galeria, sticky sob o header */
@@ -644,28 +754,49 @@ rf-apartment-detail { display: block; }
   font-weight: 700;
 }
 
-.apartment-detail__modal-grid {
+.apartment-detail__lightbox {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 0.85rem;
-  padding: 1rem 1.25rem 2rem;
-  max-width: 1200px;
-  margin-inline: auto;
+  place-items: center;
+  min-height: calc(100vh - 4rem);
+  padding: 1rem;
 }
 
-.apartment-detail__modal-grid figure {
-  margin: 0;
-  aspect-ratio: 4 / 3;
+.apartment-detail__lightbox-stage {
+  width: min(1100px, 100%);
+  aspect-ratio: 16 / 10;
+  max-height: 78vh;
   border-radius: 12px;
   overflow: hidden;
   background: var(--orla-900);
 }
 
-.apartment-detail__modal-grid img {
+.apartment-detail__lightbox-stage picture,
+.apartment-detail__lightbox-stage img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #0a1f32;
 }
+
+.apartment-detail__lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 251, 244, 0.92);
+  color: var(--ink);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.apartment-detail__lightbox-nav--prev { left: 1rem; }
+.apartment-detail__lightbox-nav--next { right: 1rem; }
 
 @media (max-width: 960px) {
   .apartment-detail__layout {
@@ -677,24 +808,12 @@ rf-apartment-detail { display: block; }
     order: -1;
   }
 
-  .apartment-detail__gallery {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    height: auto;
+  .apt-slideshow__stage {
+    height: clamp(16rem, 56vw, 24rem);
   }
 
-  .apartment-detail__shot--main {
-    grid-column: span 2;
-    grid-row: span 1;
-    aspect-ratio: 16 / 10;
-  }
-
-  .apartment-detail__shot:not(.apartment-detail__shot--main) {
-    aspect-ratio: 4 / 3;
-  }
-
-  .apartment-detail__shot:nth-child(n + 5) {
-    display: none;
+  .apt-slideshow__thumbs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .apartment-detail__scoreboard {
@@ -720,18 +839,23 @@ rf-apartment-detail { display: block; }
     grid-template-columns: 1fr;
   }
 
-  .apartment-detail__gallery {
-    grid-template-columns: 1fr;
-    height: auto;
+  .apt-slideshow__stage {
+    height: min(62vw, 20rem);
+    border-radius: 12px;
   }
 
-  .apartment-detail__shot--main {
-    grid-column: auto;
-    aspect-ratio: 4 / 3;
+  .apt-slideshow__thumbs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .apartment-detail__shot:not(.apartment-detail__shot--main) {
+  .apt-slideshow__thumb:nth-child(n + 5) {
     display: none;
+  }
+
+  .apt-slideshow__nav {
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: 1.25rem;
   }
 
   .apartment-detail__dates,

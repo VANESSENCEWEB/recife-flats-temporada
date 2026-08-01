@@ -12,17 +12,18 @@ import {
 import { apartmentUrl } from '../data/site-structure.js';
 import { whatsappUrl } from '../data/location.js';
 
-function pictureHtml(src, alt) {
+function pictureHtml(src, alt, eager = false) {
+  const loading = eager ? 'eager' : 'lazy';
   const isWebp = /\.webp$/i.test(src);
   if (!isWebp) {
-    return `<img src="${src}" alt="${alt}" loading="lazy" decoding="async" width="640" height="480">`;
+    return `<img src="${src}" alt="${alt}" loading="${loading}" decoding="async" width="640" height="480">`;
   }
   const avif = src.replace(/\.webp$/i, '.avif');
   return `
     <picture>
       <source srcset="${avif}" type="image/avif">
       <source srcset="${src}" type="image/webp">
-      <img src="${src}" alt="${alt}" loading="lazy" decoding="async" width="640" height="480">
+      <img src="${src}" alt="${alt}" loading="${loading}" decoding="async" width="640" height="480">
     </picture>
   `;
 }
@@ -36,7 +37,7 @@ class RFApartmentCard extends HTMLElement {
       return;
     }
 
-    const cover = resolveImages(apt)[0];
+    const images = resolveImages(apt).slice(0, 6);
     const href = apartmentUrl(apt.slug);
     const wa = whatsappUrl(`Olá! Tenho interesse no ${apt.name}.`);
 
@@ -54,9 +55,14 @@ class RFApartmentCard extends HTMLElement {
     this.dataset.neighborhood = apt.neighborhoodSlug || '';
     this.innerHTML = `
       <article class="apartment-card" data-neighborhood="${apt.neighborhoodSlug || ''}">
-        <a class="apartment-card__media" href="${href}">
-          ${pictureHtml(cover.src, cover.alt)}
+        <a class="apartment-card__media" href="${href}" data-card-slideshow aria-label="${apt.name}">
+          ${images.map((img, i) => `
+            <span class="apartment-card__slide${i === 0 ? ' is-active' : ''}" data-card-slide="${i}" ${i === 0 ? '' : 'aria-hidden="true"'}>
+              ${pictureHtml(img.src, i === 0 ? img.alt : '', i === 0)}
+            </span>
+          `).join('')}
           ${apt.badge ? `<span class="apartment-card__badge">${apt.badge}</span>` : ''}
+          ${images.length > 1 ? `<span class="apartment-card__dots" aria-hidden="true">${images.map((_, i) => `<i class="${i === 0 ? 'is-active' : ''}"></i>`).join('')}</span>` : ''}
         </a>
         <div class="apartment-card__body">
           <p class="apartment-card__eyebrow">${apt.neighborhood}</p>
@@ -75,6 +81,60 @@ class RFApartmentCard extends HTMLElement {
         </div>
       </article>
     `;
+
+    // cover kept for potential future use / lint silence
+    void cover;
+    this.#bindCardSlideshow();
+  }
+
+  #bindCardSlideshow() {
+    const media = this.querySelector('[data-card-slideshow]');
+    if (!media) return;
+    const slides = [...media.querySelectorAll('[data-card-slide]')];
+    const dots = [...media.querySelectorAll('.apartment-card__dots i')];
+    if (slides.length < 2) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    let index = 0;
+    let timer = null;
+    const INTERVAL = 2600;
+
+    const render = () => {
+      slides.forEach((slide, i) => {
+        const on = i === index;
+        slide.classList.toggle('is-active', on);
+        slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
+      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+    };
+
+    const start = () => {
+      stop();
+      timer = window.setInterval(() => {
+        index = (index + 1) % slides.length;
+        render();
+      }, INTERVAL);
+    };
+
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) start();
+        else stop();
+      }
+    }, { threshold: 0.35 });
+
+    io.observe(media);
+    media.addEventListener('mouseenter', stop);
+    media.addEventListener('mouseleave', start);
   }
 }
 

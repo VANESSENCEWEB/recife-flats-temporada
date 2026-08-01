@@ -131,7 +131,6 @@ class RFApartmentDetail extends HTMLElement {
     }
 
     const images = resolveImages(apt);
-    const cover = images.slice(0, 5);
     const n = getNeighborhood(apt.neighborhoodSlug);
     const priceNight = parseBRL(apt.priceFrom);
     const cleaningFee = Number(apt.cleaningFee) || 0;
@@ -179,16 +178,41 @@ class RFApartmentDetail extends HTMLElement {
             <p class="apartment-detail__tagline">${apt.tagline}</p>
           </header>
 
-          <div class="apartment-detail__gallery" aria-label="Galeria de fotos">
-            ${cover.map((img, i) => `
-              <button type="button" class="apartment-detail__shot${i === 0 ? ' apartment-detail__shot--main' : ''}" data-gallery-open data-gallery-index="${i}" aria-label="Abrir foto ${i + 1}">
-                ${pictureHtml(img.src, img.alt, i === 0)}
-              </button>
-            `).join('')}
-            <button type="button" class="apartment-detail__show-all" data-gallery-open data-gallery-index="0">
-              Mostrar todas as fotos (${images.length})
-            </button>
-          </div>
+          <section class="apt-slideshow" data-slideshow aria-roledescription="carrossel" aria-label="Galeria de fotos do imóvel">
+            <div class="apt-slideshow__stage">
+              <div class="apt-slideshow__track" data-slideshow-track>
+                ${images.map((img, i) => `
+                  <figure class="apt-slideshow__slide${i === 0 ? ' is-active' : ''}" data-slide="${i}" ${i === 0 ? '' : 'aria-hidden="true"'}>
+                    ${pictureHtml(img.src, img.alt, i < 2)}
+                  </figure>
+                `).join('')}
+              </div>
+
+              <button type="button" class="apt-slideshow__nav apt-slideshow__nav--prev" data-slideshow-prev aria-label="Foto anterior">‹</button>
+              <button type="button" class="apt-slideshow__nav apt-slideshow__nav--next" data-slideshow-next aria-label="Próxima foto">›</button>
+
+              <div class="apt-slideshow__ui">
+                <span class="apt-slideshow__count" data-slideshow-count>1 / ${images.length}</span>
+                <button type="button" class="apt-slideshow__toggle" data-slideshow-toggle aria-label="Pausar slideshow" aria-pressed="false">❚❚</button>
+                <button type="button" class="apt-slideshow__all" data-gallery-open data-gallery-index="0">
+                  Ver todas (${images.length})
+                </button>
+              </div>
+            </div>
+
+            <div class="apt-slideshow__thumbs" role="tablist" aria-label="Miniaturas">
+              ${images.slice(0, Math.min(8, images.length)).map((img, i) => `
+                <button type="button" class="apt-slideshow__thumb${i === 0 ? ' is-active' : ''}" data-slideshow-goto="${i}" aria-label="Ir para foto ${i + 1}" role="tab" aria-selected="${i === 0 ? 'true' : 'false'}">
+                  ${pictureHtml(img.src, '', false)}
+                </button>
+              `).join('')}
+              ${images.length > 8 ? `
+                <button type="button" class="apt-slideshow__thumb apt-slideshow__thumb--more" data-gallery-open data-gallery-index="8" aria-label="Ver mais fotos">
+                  +${images.length - 8}
+                </button>
+              ` : ''}
+            </div>
+          </section>
         </div>
 
         <nav class="apartment-detail__tabs" aria-label="Seções do imóvel">
@@ -402,13 +426,15 @@ class RFApartmentDetail extends HTMLElement {
 
         <div class="apartment-detail__modal" data-gallery-modal hidden>
           <div class="apartment-detail__modal-bar">
-            <p>Todas as fotos · ${apt.name}</p>
+            <p data-lightbox-label>Foto 1 / ${images.length} · ${apt.name}</p>
             <button type="button" data-gallery-close aria-label="Fechar galeria">Fechar</button>
           </div>
-          <div class="apartment-detail__modal-grid">
-            ${images.map((img) => `
-              <figure>${pictureHtml(img.src, img.alt)}</figure>
-            `).join('')}
+          <div class="apartment-detail__lightbox" data-lightbox>
+            <button type="button" class="apartment-detail__lightbox-nav apartment-detail__lightbox-nav--prev" data-lightbox-prev aria-label="Anterior">‹</button>
+            <div class="apartment-detail__lightbox-stage" data-lightbox-stage>
+              ${pictureHtml(images[0]?.src || '', images[0]?.alt || '', true)}
+            </div>
+            <button type="button" class="apartment-detail__lightbox-nav apartment-detail__lightbox-nav--next" data-lightbox-next aria-label="Próxima">›</button>
           </div>
         </div>
       </article>
@@ -416,7 +442,8 @@ class RFApartmentDetail extends HTMLElement {
 
     this.#bindTabs();
     this.#bindBooking(apt, priceNight, cleaningFee);
-    this.#bindGallery();
+    this.#bindSlideshow(images);
+    this.#bindGallery(images);
   }
 
   #bindTabs() {
@@ -496,17 +523,126 @@ class RFApartmentDetail extends HTMLElement {
     });
   }
 
-  #bindGallery() {
-    const modal = this.querySelector('[data-gallery-modal]');
-    const grid = this.querySelector('.apartment-detail__modal-grid');
+  #bindSlideshow(images) {
+    const root = this.querySelector('[data-slideshow]');
+    if (!root || images.length < 2) return;
 
-    const openGallery = (index = 0) => {
-      if (!modal) return;
+    const slides = [...root.querySelectorAll('[data-slide]')];
+    const thumbs = [...root.querySelectorAll('[data-slideshow-goto]')];
+    const countEl = root.querySelector('[data-slideshow-count]');
+    const toggleBtn = root.querySelector('[data-slideshow-toggle]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const INTERVAL = 2800;
+    let index = 0;
+    let timer = null;
+    let playing = !reduced;
+
+    const render = () => {
+      slides.forEach((slide, i) => {
+        const on = i === index;
+        slide.classList.toggle('is-active', on);
+        slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
+      thumbs.forEach((thumb) => {
+        const i = Number(thumb.dataset.slideshowGoto);
+        const on = i === index;
+        thumb.classList.toggle('is-active', on);
+        thumb.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (countEl) countEl.textContent = `${index + 1} / ${images.length}`;
+    };
+
+    const goTo = (next) => {
+      index = (next + images.length) % images.length;
+      render();
+    };
+
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const start = () => {
+      stop();
+      if (!playing || reduced) return;
+      timer = window.setInterval(() => goTo(index + 1), INTERVAL);
+    };
+
+    const setPlaying = (on) => {
+      playing = on && !reduced;
+      if (toggleBtn) {
+        toggleBtn.setAttribute('aria-pressed', playing ? 'false' : 'true');
+        toggleBtn.setAttribute('aria-label', playing ? 'Pausar slideshow' : 'Reproduzir slideshow');
+        toggleBtn.textContent = playing ? '❚❚' : '▶';
+      }
+      if (playing) start();
+      else stop();
+    };
+
+    root.querySelector('[data-slideshow-prev]')?.addEventListener('click', () => {
+      goTo(index - 1);
+      if (playing) start();
+    });
+    root.querySelector('[data-slideshow-next]')?.addEventListener('click', () => {
+      goTo(index + 1);
+      if (playing) start();
+    });
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        goTo(Number(thumb.dataset.slideshowGoto) || 0);
+        if (playing) start();
+      });
+    });
+    toggleBtn?.addEventListener('click', () => setPlaying(!playing));
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', () => {
+      if (playing) start();
+    });
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', (e) => {
+      if (!root.contains(e.relatedTarget) && playing) start();
+    });
+
+    // Pause when lightbox opens / page hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (playing) start();
+    });
+
+    render();
+    setPlaying(playing);
+    this._slideshowStop = stop;
+  }
+
+  #bindGallery(images) {
+    const modal = this.querySelector('[data-gallery-modal]');
+    const stage = this.querySelector('[data-lightbox-stage]');
+    const label = this.querySelector('[data-lightbox-label]');
+    if (!modal || !stage) return;
+
+    let index = 0;
+
+    const paint = () => {
+      const img = images[index];
+      if (!img) return;
+      stage.innerHTML = pictureHtml(img.src, img.alt, true);
+      if (label) label.textContent = `Foto ${index + 1} / ${images.length}`;
+    };
+
+    const openGallery = (startAt = 0) => {
+      index = Math.max(0, Math.min(images.length - 1, startAt));
+      paint();
       modal.hidden = false;
       document.body.style.overflow = 'hidden';
-      const figures = grid?.querySelectorAll('figure');
-      const target = figures?.[index];
-      target?.scrollIntoView({ block: 'center' });
+      this._slideshowStop?.();
+    };
+
+    const closeGallery = () => {
+      modal.hidden = true;
+      document.body.style.overflow = '';
     };
 
     this.querySelectorAll('[data-gallery-open]').forEach((btn) => {
@@ -515,23 +651,36 @@ class RFApartmentDetail extends HTMLElement {
       });
     });
 
-    this.querySelector('[data-gallery-close]')?.addEventListener('click', () => {
-      if (!modal) return;
-      modal.hidden = true;
-      document.body.style.overflow = '';
+    // Click active slide opens lightbox
+    this.querySelector('[data-slideshow-track]')?.addEventListener('click', () => {
+      const active = this.querySelector('.apt-slideshow__slide.is-active');
+      openGallery(Number(active?.dataset.slide) || 0);
     });
 
-    modal?.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.hidden = true;
-        document.body.style.overflow = '';
-      }
+    this.querySelector('[data-gallery-close]')?.addEventListener('click', closeGallery);
+    this.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => {
+      index = (index - 1 + images.length) % images.length;
+      paint();
+    });
+    this.querySelector('[data-lightbox-next]')?.addEventListener('click', () => {
+      index = (index + 1) % images.length;
+      paint();
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeGallery();
     });
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal && !modal.hidden) {
-        modal.hidden = true;
-        document.body.style.overflow = '';
+      if (modal.hidden) return;
+      if (e.key === 'Escape') closeGallery();
+      if (e.key === 'ArrowLeft') {
+        index = (index - 1 + images.length) % images.length;
+        paint();
+      }
+      if (e.key === 'ArrowRight') {
+        index = (index + 1) % images.length;
+        paint();
       }
     });
   }
