@@ -16,7 +16,7 @@
   --sol-800: #8F520F;
   --sol-900: #6B3C0C;
 
-  /* ---------- ÁGUA / ORLA (apoio) ---------- */
+  /* ---------- ÁGUA / TEAL (apoio geral) ---------- */
   --agua-100: #E7F6F7;
   --agua-200: #C8EAED;
   --agua-300: #8FD0D6;
@@ -24,6 +24,18 @@
   --agua-500: #2A8F9C;  /* água clara, não neon */
   --agua-600: #1F6F7A;
   --agua-700: #18565E;
+
+  /* ---------- ORLA / AZUL (Boa Viagem — praia) ---------- */
+  --orla-100: #E8F3FB;
+  --orla-200: #C9E2F4;
+  --orla-300: #8FC4E6;
+  --orla-400: #4A9FD4;
+  --orla-500: #2B82BC;
+  --orla-600: #1F6799;  /* azul orla principal */
+  --orla-700: #18507A;
+  --orla-800: #133C5C;
+  --orla-900: #0E2B43;
+  --orla-1000: #0A1F32;
 
   /* ---------- MANGUE (mais aberto / menos “floresta”) ---------- */
   --mangue-100: #EEF5F1;
@@ -194,6 +206,56 @@
   --section-py: clamp(4rem, 7vw, 6rem);
   --fs-section-title: clamp(1.75rem, 3.2vw, 2.875rem);
   --fs-section-lead: 1.05rem;
+
+  /* Tema semântico por bairro (padrão = marca / Pina) */
+  --theme-accent: var(--mangue-600);
+  --theme-accent-soft: var(--mangue-100);
+  --theme-accent-deep: var(--mangue-800);
+  --theme-surface: var(--mangue-1000);
+}
+
+/* Boa Viagem — azul orla (praia), sem trocar a marca global */
+[data-theme="boa-viagem"] {
+  --theme-accent: var(--orla-600);
+  --theme-accent-soft: var(--orla-100);
+  --theme-accent-deep: var(--orla-800);
+  --theme-surface: var(--orla-1000);
+
+  --agua-100: var(--orla-100);
+  --agua-200: var(--orla-200);
+  --agua-300: var(--orla-300);
+  --agua-400: var(--orla-400);
+  --agua-500: var(--orla-500);
+  --agua-600: var(--orla-600);
+  --agua-700: var(--orla-700);
+
+  --mangue-500: var(--orla-500);
+  --mangue-600: var(--orla-600);
+  --mangue-700: var(--orla-700);
+  --mangue-800: var(--orla-800);
+  --mangue-900: var(--orla-900);
+  --mangue-1000: var(--orla-1000);
+
+  --mare: var(--orla-600);
+  --mare-escuro: var(--orla-800);
+  --mare-claro: var(--orla-500);
+  --ocean: var(--orla-600);
+  --ocean-light: var(--orla-500);
+  --accent-dark: var(--orla-600);
+  --accent-darker: var(--orla-800);
+  --brand-blue: var(--orla-500);
+  --sky-soft: var(--orla-100);
+  --sky-mid: var(--orla-300);
+  --ink: #1C2A36;
+  --ink-soft: #5A6B78;
+  --line: rgba(28, 42, 54, 0.12);
+}
+
+[data-theme="pina"] {
+  --theme-accent: var(--mangue-600);
+  --theme-accent-soft: var(--mangue-100);
+  --theme-accent-deep: var(--mangue-800);
+  --theme-surface: var(--mangue-1000);
 }
 
 @media (prefers-reduced-motion: reduce) {

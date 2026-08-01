@@ -18,7 +18,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--agua-600);
+  color: var(--theme-accent, var(--agua-600));
 }
 
 .page-header h1 {
@@ -35,7 +35,19 @@
 .display-italic {
   font-style: italic;
   font-weight: 500;
-  color: var(--mangue-600);
+  color: var(--theme-accent, var(--mangue-600));
+}
+
+[data-theme="boa-viagem"] .site-content {
+  background:
+    radial-gradient(ellipse 70% 40% at 100% 0%, rgba(74, 159, 212, 0.12), transparent 55%),
+    var(--sand-200);
+}
+
+[data-theme="pina"] .site-content {
+  background:
+    radial-gradient(ellipse 70% 40% at 100% 0%, rgba(63, 138, 104, 0.1), transparent 55%),
+    var(--sand-200);
 }
 
 .page-header__lead {

@@ -51,8 +51,9 @@ class RFApartmentCard extends HTMLElement {
       ? `<span class="apartment-card__price"><strong>${apt.priceFrom}</strong> ${apt.priceNote || ''}</span>`
       : `<span class="apartment-card__price"><strong>${apt.priceNote || 'Sob consulta'}</strong></span>`;
 
+    this.dataset.neighborhood = apt.neighborhoodSlug || '';
     this.innerHTML = `
-      <article class="apartment-card">
+      <article class="apartment-card" data-neighborhood="${apt.neighborhoodSlug || ''}">
         <a class="apartment-card__media" href="${href}">
           ${pictureHtml(cover.src, cover.alt)}
           ${apt.badge ? `<span class="apartment-card__badge">${apt.badge}</span>` : ''}

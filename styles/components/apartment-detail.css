@@ -14,7 +14,7 @@ rf-apartment-detail { display: block; }
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--agua-600);
+  color: var(--theme-accent, var(--agua-600));
 }
 
 .apartment-detail__header h1 {

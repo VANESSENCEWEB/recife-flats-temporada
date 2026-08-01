@@ -535,6 +535,16 @@ rf-booking-promo {
   text-underline-offset: 0.15em;
 }
 
+.location-section__benefit[data-neighborhood="boa-viagem"] h3,
+.location-section__benefit[data-neighborhood="boa-viagem"] a {
+  color: var(--orla-700);
+}
+
+.location-section__benefit[data-neighborhood="pina"] h3,
+.location-section__benefit[data-neighborhood="pina"] a {
+  color: var(--mangue-700);
+}
+
 .location-section__map {
   position: sticky;
   top: calc(var(--nav-height) + 1rem);

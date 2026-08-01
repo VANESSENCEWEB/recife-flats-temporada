@@ -83,7 +83,7 @@ rf-neighborhood-hub { display: block; }
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
-  background: var(--sol-500);
+  background: var(--theme-accent, var(--sol-500));
 }
 
 @media (max-width: 800px) {

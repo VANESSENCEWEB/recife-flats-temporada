@@ -54,6 +54,20 @@ rf-apartment-card { display: block; height: 100%; }
   flex: 1;
 }
 
+.apartment-card[data-neighborhood="boa-viagem"] .apartment-card__eyebrow,
+rf-apartment-card[data-neighborhood="boa-viagem"] .apartment-card__eyebrow {
+  color: var(--orla-600);
+}
+
+.apartment-card[data-neighborhood="pina"] .apartment-card__eyebrow,
+rf-apartment-card[data-neighborhood="pina"] .apartment-card__eyebrow {
+  color: var(--mangue-600);
+}
+
+.apartment-card[data-neighborhood="boa-viagem"] .apartment-card__badge {
+  background: rgba(15, 43, 67, 0.88);
+}
+
 .apartment-card__eyebrow {
   margin: 0;
   font-size: 0.75rem;

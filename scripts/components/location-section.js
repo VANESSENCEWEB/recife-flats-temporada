@@ -19,7 +19,7 @@ class RFLocationSection extends HTMLElement {
           <div class="location-section__grid">
             <div class="location-section__benefits">
               ${LOCATION_BENEFITS.map((b) => `
-                <article class="location-section__benefit">
+                <article class="location-section__benefit" data-neighborhood="${b.id === 'pratico' ? '' : b.id}">
                   <h3>${b.title}</h3>
                   <p>${b.description}</p>
                   <ul>
