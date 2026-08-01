@@ -82,8 +82,6 @@ class RFApartmentCard extends HTMLElement {
       </article>
     `;
 
-    // cover kept for potential future use / lint silence
-    void cover;
     this.#bindCardSlideshow();
   }
 
