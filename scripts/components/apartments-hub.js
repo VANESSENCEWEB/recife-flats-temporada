@@ -10,8 +10,15 @@ import './apartment-card.js';
 
 class RFApartmentsHub extends HTMLElement {
   connectedCallback() {
-    this._neighborhood = this.getAttribute('neighborhood') || '';
-    this._filters = { bedrooms: '', pool: false, parking: false };
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = params.get('neighborhood') || '';
+    this._neighborhood = this.getAttribute('neighborhood') || fromUrl || '';
+    this._filters = {
+      bedrooms: params.get('bedrooms') || '',
+      pool: params.get('pool') === '1' || params.get('pool') === 'true',
+      parking: params.get('parking') === '1' || params.get('parking') === 'true',
+      guests: params.get('guests') || '',
+    };
     this._render();
   }
 
@@ -23,6 +30,10 @@ class RFApartmentsHub extends HTMLElement {
     if (this._filters.bedrooms) {
       const n = Number(this._filters.bedrooms);
       list = list.filter((a) => a.bedrooms === n);
+    }
+    if (this._filters.guests) {
+      const g = Number(this._filters.guests);
+      if (!Number.isNaN(g)) list = list.filter((a) => a.guests >= g);
     }
     if (this._filters.pool) list = list.filter((a) => a.pool);
     if (this._filters.parking) list = list.filter((a) => a.parking);
