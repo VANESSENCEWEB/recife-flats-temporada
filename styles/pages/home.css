@@ -44,15 +44,22 @@
   --site-chrome-height: var(--nav-height);
 }
 
+/* Chrome fixo no topo (announcement + navbar) — não usar sticky
+   dentro de .site-content (transform do menu quebra sticky). */
 .site-content--home-full .site-chrome {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: calc(var(--z-nav) + 2);
   display: flex;
   flex-direction: column;
-  gap: 0;
-  margin: 0;
   width: 100%;
+  pointer-events: none;
+}
+
+.site-content--home-full .site-chrome > * {
+  pointer-events: auto;
 }
 
 .site-content--home-full .announcement {
@@ -85,7 +92,6 @@
   right: auto;
   width: 100%;
   margin: 0;
-  box-shadow: none;
   border: none;
 }
 
@@ -94,12 +100,13 @@
 }
 
 .site-content--home-full .hero {
-  margin-top: calc(-1 * var(--site-chrome-height));
+  margin-top: 0;
   margin-inline: 0;
   width: 100%;
   border: none;
   border-radius: 0;
   --hero-header-offset: var(--site-chrome-height);
+  --hero-cloud-reserve: 0rem;
 }
 
 .site-content--home-full .matching-split {
@@ -120,7 +127,6 @@
 
   .site-content--home-full .hero {
     --hero-header-offset: var(--site-chrome-height);
-    margin-top: calc(-1 * var(--site-chrome-height));
   }
 }
 
