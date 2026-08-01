@@ -114,9 +114,15 @@ class RFMenu extends HTMLElement {
 
     this._menuEl  = this.querySelector('[data-menu]');
     this._wrapsEl = document.querySelector(this._wrapsSel);
+    this._hasGsap = typeof window.gsap !== 'undefined';
 
-    // Estado inicial via GSAP
-    gsap.set(this._menuEl, { opacity: 0, xPercent: 5, rotateY: 6, transformPerspective: 1400 });
+    // Estado inicial — GSAP quando disponível; senão CSS
+    if (this._hasGsap) {
+      gsap.set(this._menuEl, { opacity: 0, xPercent: 5, rotateY: 6, transformPerspective: 1400 });
+    } else {
+      this._menuEl.style.opacity = '0';
+      console.warn('[rf-menu] GSAP não encontrado — menu abre sem animação. Inclua gsap.min.js na página.');
+    }
 
     // Wiring
     this.querySelector('[data-menu-close]').addEventListener('click', () => this.close());
@@ -211,15 +217,33 @@ class RFMenu extends HTMLElement {
   open() {
     if (this._isOpen) return;
     this._isOpen = true;
-    if (!this._timeline) this._timeline = this._buildTimeline();
-    this._timeline.play();
+
+    if (this._hasGsap) {
+      if (!this._timeline) this._timeline = this._buildTimeline();
+      this._timeline.play();
+    } else {
+      this._menuEl.classList.add('is-active');
+      this._menuEl.setAttribute('aria-hidden', 'false');
+      this._menuEl.style.opacity = '1';
+      document.body.style.overflow = 'hidden';
+    }
+
     window.dispatchEvent(new CustomEvent('rf-menu-state', { detail: { open: true } }));
   }
 
   close() {
     if (!this._isOpen) return;
     this._isOpen = false;
-    this._timeline?.reverse();
+
+    if (this._hasGsap) {
+      this._timeline?.reverse();
+    } else {
+      this._menuEl.classList.remove('is-active');
+      this._menuEl.setAttribute('aria-hidden', 'true');
+      this._menuEl.style.opacity = '0';
+      document.body.style.overflow = '';
+    }
+
     window.dispatchEvent(new CustomEvent('rf-menu-state', { detail: { open: false } }));
   }
 }
