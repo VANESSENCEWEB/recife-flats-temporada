@@ -120,6 +120,52 @@ const MOTIFS = {
       <path stroke-width="1.25" d="M44 62 C58 56 72 52 84 50 C72 60 56 64 44 62 Z"/>
     </svg>
   `,
+
+  /* Duas pranchas na areia — uma com flores, outra com ondas */
+  surfboards: `
+    <svg class="beach-decor__svg" viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg" ${STROKE}>
+      <!-- prancha esquerda (mais baixa, flores) -->
+      <path stroke-width="1.55" d="
+        M28 128
+        C22 110 18 88 18 66
+        C18 42 26 22 38 14
+        C50 22 58 42 58 66
+        C58 88 54 110 48 128
+        Z"/>
+      <path stroke-width="1.15" d="M38 20 V122"/>
+      <!-- flor cima -->
+      <circle cx="38" cy="48" r="4.5" stroke-width="1.1"/>
+      <path stroke-width="1.05" d="
+        M38 40 C40 44 42 46 38 48 C34 46 36 44 38 40
+        M46 48 C42 50 40 52 38 48 C40 44 42 46 46 48
+        M38 56 C36 52 34 50 38 48 C42 50 40 52 38 56
+        M30 48 C34 46 36 44 38 48 C36 52 34 50 30 48"/>
+      <!-- flor baixo -->
+      <circle cx="38" cy="96" r="4.2" stroke-width="1.1"/>
+      <path stroke-width="1.05" d="
+        M38 88 C40 92 42 94 38 96 C34 94 36 92 38 88
+        M46 96 C42 98 40 100 38 96 C40 92 42 94 46 96
+        M38 104 C36 100 34 98 38 96 C42 98 40 100 38 104
+        M30 96 C34 94 36 92 38 96 C36 100 34 98 30 96"/>
+
+      <!-- prancha direita (mais alta, ondas) -->
+      <path stroke-width="1.55" d="
+        M68 132
+        C62 112 58 86 58 58
+        C58 32 68 12 80 8
+        C92 12 102 32 102 58
+        C102 86 98 112 92 132
+        Z"/>
+      <path stroke-width="1.15" d="M80 14 V126"/>
+      <path stroke-width="1.15" d="M66 108 C72 104 80 104 88 108 C94 111 98 110 100 108"/>
+      <path stroke-width="1.1" d="M66 116 C74 112 82 112 90 116 C96 119 100 118 100 116"/>
+      <path stroke-width="1.05" d="M68 124 C76 120 84 120 92 124"/>
+
+      <!-- areia -->
+      <path stroke-width="1.2" d="M16 134 C36 130 56 138 78 132 C96 128 108 136 118 134"/>
+      <path stroke-width="1.05" opacity="0.8" d="M20 140 C40 136 62 142 84 138 C100 136 112 140 118 140"/>
+    </svg>
+  `,
 };
 
 const PLACEMENTS = [

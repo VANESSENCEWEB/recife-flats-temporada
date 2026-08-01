@@ -270,6 +270,18 @@ rf-booking-promo {
   width: clamp(4.5rem, 9vw, 7rem);
 }
 
+/* Pranchas — canto inferior esquerdo, tom areia/rosa suave */
+.beach-decor__motif--surfboards {
+  color: #C4A484;
+  opacity: 0.22;
+  left: 2%;
+  right: auto;
+  bottom: 4%;
+  top: auto;
+  width: clamp(6.5rem, 12vw, 9.5rem);
+  transform: none;
+}
+
 .beach-decor--soft .beach-decor__motif { opacity: 0.2; }
 .beach-decor--ink .beach-decor__motif--starfish { opacity: 0.12; color: var(--orla-600); }
 .beach-decor--ink .beach-decor__motif--shell { opacity: 0.12; color: var(--sol-600); }
