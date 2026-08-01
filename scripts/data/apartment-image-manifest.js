@@ -298,108 +298,108 @@ export const APARTMENT_IMAGE_MANIFEST = {
   ],
   "studio-203-boa-viagem": [
     {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/banheiro-box-vidro-apartamento-1-quarto-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — banheiro box vidro apartamento 1 quarto boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/banheiro-completo-1-quarto-proximo-praia-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — banheiro completo 1 quarto proximo praia boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/banheiro-limpo-apartamento-1-quarto-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — banheiro limpo apartamento 1 quarto boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/cama-casal-quarto-ar-condicionado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — cama casal quarto ar condicionado boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/chuveiro-banheiro-apartamento-mobiliado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — chuveiro banheiro apartamento mobiliado boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/cozinha-completa-apartamento-1-quarto-recife_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — cozinha completa apartamento 1 quarto recife"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/cozinha-equipada-apartamento-1-quarto-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — cozinha equipada apartamento 1 quarto boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/detalhe-apartamento-1-quarto-mobiliado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — detalhe apartamento 1 quarto mobiliado boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/estacionamento-rotativo-proximo-apartamento-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — estacionamento rotativo proximo apartamento boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/fachada-edificio-ipe-boa-viagem-foto-01_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — fachada edificio ipe boa viagem foto 01"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/fachada-edificio-ipe-boa-viagem-foto-03_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — fachada edificio ipe boa viagem foto 03"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/geladeira-fogao-cozinha-mobiliada-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — geladeira fogao cozinha mobiliada boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/guarda-roupa-apartamento-1-quarto-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — guarda roupa apartamento 1 quarto boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/mesa-cozinha-apartamento-mobiliado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — mesa cozinha apartamento mobiliado boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/mesa-cozinha-apartamento-proximo-praia-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — mesa cozinha apartamento proximo praia boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/pia-armarios-cozinha-1-quarto-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — pia armarios cozinha 1 quarto boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/pia-espelho-banheiro-mobiliado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — pia espelho banheiro mobiliado boa viagem"
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/sala-estar-apartamento-1-quarto-boa-viagem-tv_opt.webp",
+      "alt": "Sala de estar com TV — Studio Boa Viagem"
     },
     {
       "src": "./assets/images/apartamentos/boa-viagem/apt-203/quarto-aconchegante-1-quarto-proximo-praia-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — quarto aconchegante 1 quarto proximo praia boa viagem"
+      "alt": "Quarto com cama de casal e ar-condicionado — Studio Boa Viagem"
     },
     {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/quarto-guarda-roupa-ar-condicionado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — quarto guarda roupa ar condicionado boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/quarto-visao-ampla-ar-condicionado-mobiliado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — quarto visao ampla ar condicionado mobiliado boa viagem"
-    },
-    {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/sala-ampla-apartamento-1-quarto-mobiliado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — sala ampla apartamento 1 quarto mobiliado boa viagem"
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/cozinha-completa-apartamento-1-quarto-recife_opt.webp",
+      "alt": "Cozinha completa equipada — Studio Boa Viagem"
     },
     {
       "src": "./assets/images/apartamentos/boa-viagem/apt-203/sala-decorada-apartamento-mobiliado-proximo-praia-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — sala decorada apartamento mobiliado proximo praia boa viagem"
+      "alt": "Sala decorada — Studio Boa Viagem"
     },
     {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/sala-estar-apartamento-1-quarto-boa-viagem-tv_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — sala estar apartamento 1 quarto boa viagem tv"
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/cama-casal-quarto-ar-condicionado-boa-viagem_opt.webp",
+      "alt": "Cama de casal com ar-condicionado — Studio Boa Viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/banheiro-completo-1-quarto-proximo-praia-boa-viagem_opt.webp",
+      "alt": "Banheiro completo — Studio Boa Viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/mesa-cozinha-apartamento-proximo-praia-boa-viagem_opt.webp",
+      "alt": "Área de jantar — Studio Boa Viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/fachada-edificio-ipe-boa-viagem-foto-01_opt.webp",
+      "alt": "Fachada do Edifício Ipê — Boa Viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/sala-ampla-apartamento-1-quarto-mobiliado-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — sala ampla apartamento 1 quarto mobiliado boa viagem"
     },
     {
       "src": "./assets/images/apartamentos/boa-viagem/apt-203/sofa-sala-apartamento-1-quarto-boa-viagem-confortavel_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — sofa sala apartamento 1 quarto boa viagem confortavel"
+      "alt": "Studio Boa Viagem — sofa sala apartamento 1 quarto boa viagem confortavel"
     },
     {
-      "src": "./assets/images/apartamentos/boa-viagem/apt-203/supermercado-entorno-apartamento-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — supermercado entorno apartamento boa viagem"
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/quarto-visao-ampla-ar-condicionado-mobiliado-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — quarto visao ampla ar condicionado mobiliado boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/cozinha-equipada-apartamento-1-quarto-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — cozinha equipada apartamento 1 quarto boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/pia-espelho-banheiro-mobiliado-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — pia espelho banheiro mobiliado boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/detalhe-apartamento-1-quarto-mobiliado-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — detalhe apartamento 1 quarto mobiliado boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/fachada-edificio-ipe-boa-viagem-foto-03_opt.webp",
+      "alt": "Studio Boa Viagem — fachada edificio ipe boa viagem foto 03"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/geladeira-fogao-cozinha-mobiliada-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — geladeira fogao cozinha mobiliada boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/guarda-roupa-apartamento-1-quarto-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — guarda roupa apartamento 1 quarto boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/mesa-cozinha-apartamento-mobiliado-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — mesa cozinha apartamento mobiliado boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/pia-armarios-cozinha-1-quarto-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — pia armarios cozinha 1 quarto boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/quarto-guarda-roupa-ar-condicionado-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — quarto guarda roupa ar condicionado boa viagem"
     },
     {
       "src": "./assets/images/apartamentos/boa-viagem/apt-203/utensilios-cozinha-apartamento-1-quarto-mobiliado-boa-viagem_opt.webp",
-      "alt": "Apartamento 1 Quarto Boa Viagem — utensilios cozinha apartamento 1 quarto mobiliado boa viagem"
+      "alt": "Studio Boa Viagem — utensilios cozinha apartamento 1 quarto mobiliado boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/estacionamento-rotativo-proximo-apartamento-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — estacionamento rotativo proximo apartamento boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/supermercado-entorno-apartamento-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — supermercado entorno apartamento boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/banheiro-box-vidro-apartamento-1-quarto-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — banheiro box vidro apartamento 1 quarto boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/banheiro-limpo-apartamento-1-quarto-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — banheiro limpo apartamento 1 quarto boa viagem"
+    },
+    {
+      "src": "./assets/images/apartamentos/boa-viagem/apt-203/chuveiro-banheiro-apartamento-mobiliado-boa-viagem_opt.webp",
+      "alt": "Studio Boa Viagem — chuveiro banheiro apartamento mobiliado boa viagem"
     }
   ],
   "apartamento-804-pina": [

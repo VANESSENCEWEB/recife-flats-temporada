@@ -65,6 +65,7 @@ function aptTypeLabel(apt) {
 }
 
 function nearbyFor(apt) {
+  if (apt.nearby?.length) return apt.nearby;
   if (apt.neighborhoodSlug === 'pina') {
     return [
       { title: 'Shopping RioMar', meta: 'Ao lado · a pé' },
@@ -82,12 +83,23 @@ function nearbyFor(apt) {
 }
 
 function houseRulesFor(apt) {
+  if (apt.houseRules?.length) return apt.houseRules;
   return [
-    'Check-in e check-out combinados na reserva',
+    apt.checkIn ? `Check-in: ${apt.checkIn}` : 'Check-in e check-out combinados na reserva',
+    apt.checkOut ? `Check-out: ${apt.checkOut}` : null,
     `Máximo de ${apt.guests} hóspedes`,
     'Sem festas ou eventos',
     apt.petFriendly ? 'Pets sob pedido / combinado prévio' : 'Pets sob consulta',
     'Silêncio entre 22h e 7h',
+  ].filter(Boolean);
+}
+
+function highlightsFor(apt) {
+  if (apt.highlights?.length) return apt.highlights;
+  return [
+    { title: 'Fotos reais', text: 'O que você vê aqui é o que encontra na chegada.' },
+    { title: 'Localização', text: apt.tagline },
+    { title: 'Reserva direta', text: 'Fale conosco no WhatsApp — sem intermediário.' },
   ];
 }
 
@@ -128,10 +140,14 @@ class RFApartmentDetail extends HTMLElement {
     const minIn = todayISO();
     const defaultOut = addDaysISO(minIn, 3);
     const nearby = nearbyFor(apt);
+    const highlights = highlightsFor(apt);
     const hasReviews = apt.reviewCount > 0;
     const maxGuests = apt.guests || 2;
     const typeLabel = aptTypeLabel(apt);
     const rules = houseRulesFor(apt);
+    const paragraphs = apt.descriptionParagraphs?.length
+      ? apt.descriptionParagraphs
+      : [];
     const defaultNights = 3;
     const defaultSub = priceNight != null ? priceNight * defaultNights : 0;
     const defaultTotal = defaultSub + cleaningFee;
@@ -151,7 +167,9 @@ class RFApartmentDetail extends HTMLElement {
             <div class="apartment-detail__meta-row">
               <p class="apartment-detail__rating">
                 <strong>${apt.rating.toFixed(1)}</strong>
-                <span>${hasReviews ? `${apt.reviewCount} avaliações` : 'Reserva direta'}</span>
+                <span>${hasReviews
+                  ? `${apt.ratingLabel ? `${apt.ratingLabel} · ` : ''}${apt.reviewCount} avaliações`
+                  : 'Reserva direta'}</span>
               </p>
               <a class="apartment-detail__place" href="#localizacao">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a6 6 0 0 0-6 6c0 4.5 6 10 6 10s6-5.5 6-10a6 6 0 0 0-6-6zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
@@ -163,11 +181,11 @@ class RFApartmentDetail extends HTMLElement {
 
           <div class="apartment-detail__gallery" aria-label="Galeria de fotos">
             ${cover.map((img, i) => `
-              <figure class="apartment-detail__shot${i === 0 ? ' apartment-detail__shot--main' : ''}">
+              <button type="button" class="apartment-detail__shot${i === 0 ? ' apartment-detail__shot--main' : ''}" data-gallery-open data-gallery-index="${i}" aria-label="Abrir foto ${i + 1}">
                 ${pictureHtml(img.src, img.alt, i === 0)}
-              </figure>
+              </button>
             `).join('')}
-            <button type="button" class="apartment-detail__show-all" data-gallery-open>
+            <button type="button" class="apartment-detail__show-all" data-gallery-open data-gallery-index="0">
               Mostrar todas as fotos (${images.length})
             </button>
           </div>
@@ -189,24 +207,19 @@ class RFApartmentDetail extends HTMLElement {
               <section class="apartment-detail__block" id="visao-geral">
                 <h2>Sobre este espaço</h2>
                 <p class="apartment-detail__facts">
-                  ${apt.guests} hóspedes · ${apt.bedrooms} quarto${apt.bedrooms > 1 ? 's' : ''} · ${apt.beds} cama${apt.beds > 1 ? 's' : ''} · ${apt.bathrooms} banheiro${apt.bathrooms > 1 ? 's' : ''}${apt.size ? ` · ${apt.size}` : ''}
+                  ${apt.guests} hóspedes · ${apt.bedrooms} quarto${apt.bedrooms > 1 ? 's' : ''} · ${apt.bedDetail || `${apt.beds} cama${apt.beds > 1 ? 's' : ''}`} · ${apt.bathrooms} banheiro${apt.bathrooms > 1 ? 's' : ''}${apt.size ? ` · ${apt.size}` : ''}
                 </p>
                 <ul class="apartment-detail__highlights">
-                  <li>
-                    <strong>Fotos reais</strong>
-                    <span>O que você vê aqui é o que encontra na chegada.</span>
-                  </li>
-                  <li>
-                    <strong>Localização</strong>
-                    <span>${apt.tagline}</span>
-                  </li>
-                  <li>
-                    <strong>Reserva direta</strong>
-                    <span>Fale conosco no WhatsApp — sem intermediário.</span>
-                  </li>
+                  ${highlights.map((h) => `
+                    <li>
+                      <strong>${h.title}</strong>
+                      <span>${h.text}</span>
+                    </li>
+                  `).join('')}
                 </ul>
                 <div class="apartment-detail__description">
                   <p>${apt.description}</p>
+                  ${paragraphs.map((p) => `<p>${p}</p>`).join('')}
                   ${apt.building ? `<p class="apartment-detail__address">${apt.building}</p>` : ''}
                 </div>
               </section>
@@ -221,6 +234,19 @@ class RFApartmentDetail extends HTMLElement {
               <section class="apartment-detail__block" id="avaliacoes">
                 <h2>${hasReviews ? `${apt.rating.toFixed(1)} · ${apt.reviewCount} avaliações` : 'Avaliações'}</h2>
                 ${hasReviews ? `
+                  ${apt.reviewScores?.length ? `
+                    <ul class="apartment-detail__scoreboard">
+                      ${apt.reviewScores.map((s) => `
+                        <li>
+                          <span>${s.label}</span>
+                          <div class="apartment-detail__score-bar" aria-hidden="true">
+                            <i style="--score:${Math.min(100, (Number(s.score) / 10) * 100)}%"></i>
+                          </div>
+                          <strong>${Number(s.score).toFixed(1)}</strong>
+                        </li>
+                      `).join('')}
+                    </ul>
+                  ` : ''}
                   <ul class="apartment-detail__reviews">
                     ${SAMPLE_REVIEWS.map((r) => `
                       <li class="apartment-detail__review">
@@ -235,7 +261,6 @@ class RFApartmentDetail extends HTMLElement {
                       </li>
                     `).join('')}
                   </ul>
-                  <a class="btn btn--ghost" href="${MAPS_LINKS.reviews}" target="_blank" rel="noopener noreferrer">Ver no Google</a>
                 ` : `
                   <p class="apartment-detail__muted">Ainda estamos reunindo avaliações públicas deste imóvel. Fale no WhatsApp para tirar dúvidas e ver disponibilidade.</p>
                 `}
@@ -243,7 +268,7 @@ class RFApartmentDetail extends HTMLElement {
 
               <section class="apartment-detail__block" id="localizacao">
                 <h2>Onde você vai ficar</h2>
-                <p class="apartment-detail__muted">${apt.neighborhood}, Recife — Pernambuco. Endereço exato após confirmação da reserva.</p>
+                <p class="apartment-detail__muted">${apt.neighborhood}, Recife — Pernambuco. Endereço aproximado para referência; o completo é enviado após a confirmação da reserva.</p>
                 <div class="apartment-detail__map">
                   <iframe
                     title="Mapa — ${apt.name}"
@@ -253,6 +278,7 @@ class RFApartmentDetail extends HTMLElement {
                     allowfullscreen
                   ></iframe>
                 </div>
+                <h3 class="apartment-detail__subhead">O que há por perto</h3>
                 <ul class="apartment-detail__nearby">
                   ${nearby.map((p) => `
                     <li>
@@ -277,6 +303,11 @@ class RFApartmentDetail extends HTMLElement {
                     <ul>
                       ${rules.map((r) => `<li>${r}</li>`).join('')}
                     </ul>
+                  </div>
+                  <div>
+                    <h3>Horários</h3>
+                    <p>Check-in: ${apt.checkIn || 'combinado na reserva'} · Check-out: ${apt.checkOut || 'combinado na reserva'}</p>
+                    ${apt.damageDeposit ? `<p>Caução: ${apt.damageDeposit}</p>` : ''}
                   </div>
                   <div>
                     <h3>Cancelamento</h3>
@@ -467,11 +498,21 @@ class RFApartmentDetail extends HTMLElement {
 
   #bindGallery() {
     const modal = this.querySelector('[data-gallery-modal]');
+    const grid = this.querySelector('.apartment-detail__modal-grid');
 
-    this.querySelector('[data-gallery-open]')?.addEventListener('click', () => {
+    const openGallery = (index = 0) => {
       if (!modal) return;
       modal.hidden = false;
       document.body.style.overflow = 'hidden';
+      const figures = grid?.querySelectorAll('figure');
+      const target = figures?.[index];
+      target?.scrollIntoView({ block: 'center' });
+    };
+
+    this.querySelectorAll('[data-gallery-open]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openGallery(Number(btn.dataset.galleryIndex) || 0);
+      });
     });
 
     this.querySelector('[data-gallery-close]')?.addEventListener('click', () => {
