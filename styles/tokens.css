@@ -26,13 +26,13 @@
   --agua-700: #18565E;
 
   /* ---------- ORLA / AZUL (Boa Viagem — praia) ---------- */
-  --orla-100: #E8F3FB;
-  --orla-200: #C9E2F4;
-  --orla-300: #8FC4E6;
-  --orla-400: #4A9FD4;
-  --orla-500: #2B82BC;
-  --orla-600: #1F6799;  /* azul orla principal */
-  --orla-700: #18507A;
+  --orla-100: #F0F7FC;
+  --orla-200: #D9ECF8;
+  --orla-300: #A8D2EF;
+  --orla-400: #6BB3E0;
+  --orla-500: #3B96CD;   /* azul médio mais claro */
+  --orla-600: #2A7FB8;   /* principal — mais claro que #1F6799 */
+  --orla-700: #1F6594;
   --orla-800: #133C5C;
   --orla-900: #0E2B43;
   --orla-1000: #0A1F32;
