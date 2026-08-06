@@ -343,7 +343,7 @@ rf-booking-promo {
 
 .matching-teaser__split {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   min-height: clamp(28rem, 70vw, 36rem);
 }
 
@@ -352,13 +352,9 @@ rf-booking-promo {
   z-index: 2;
   display: flex;
   align-items: center;
-  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3.5rem);
-  background: linear-gradient(
-    90deg,
-    var(--sand-200) 0%,
-    var(--sand-200) 72%,
-    rgba(247, 240, 227, 0) 100%
-  );
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3rem);
+  /* fundo sólido — o fade fica só na foto, mais fino */
+  background: var(--sand-200);
 }
 
 .matching-teaser__copy-inner {
@@ -457,21 +453,21 @@ rf-booking-promo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: 65% center;
 }
 
-/* Fade da imagem para o texto (passagem suave do print) */
+/* Fade fino na borda da foto — mix leve, sem cobrir o mascote */
 .matching-teaser__visual::before {
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
-  width: min(42%, 14rem);
+  width: min(18%, 5.5rem);
   z-index: 1;
   pointer-events: none;
   background: linear-gradient(
     90deg,
     var(--sand-200) 0%,
-    rgba(247, 240, 227, 0.75) 45%,
+    rgba(247, 240, 227, 0.35) 40%,
     rgba(247, 240, 227, 0) 100%
   );
 }
@@ -494,7 +490,7 @@ rf-booking-promo {
   .matching-teaser__visual::before {
     inset: 0 0 auto 0;
     width: 100%;
-    height: 4.5rem;
+    height: 2.25rem;
     background: linear-gradient(
       180deg,
       var(--sand-200) 0%,
