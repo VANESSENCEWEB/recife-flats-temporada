@@ -51,7 +51,7 @@ class RFMatchingTeaser extends HTMLElement {
 
           <div class="matching-teaser__visual" aria-hidden="true">
             <img
-              src="./assets/images/brand/mascotes-matching.webp"
+              src="./assets/images/brand/mascote-whatsapp.webp"
               alt=""
               width="960"
               height="720"
