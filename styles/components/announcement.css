@@ -1,0 +1,41 @@
+/* ============================================================
+   ANNOUNCEMENT
+============================================================ */
+
+rf-announcement { display: block; }
+
+.announcement {
+  background: var(--orla-900);
+  color: var(--paper);
+  min-height: var(--announcement-height, 40px);
+  display: flex;
+  align-items: center;
+}
+
+.announcement__inner {
+  width: 100%;
+  text-align: center;
+  padding-block: 0.55rem;
+}
+
+.announcement__text {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.announcement__text strong {
+  font-weight: 700;
+  color: var(--sol-300);
+}
+
+@media (max-width: 480px) {
+  .announcement {
+    min-height: var(--announcement-height-mobile, 36px);
+  }
+
+  .announcement__text {
+    font-size: 0.8rem;
+  }
+}

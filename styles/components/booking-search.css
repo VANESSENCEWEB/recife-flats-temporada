@@ -1,0 +1,110 @@
+/* ============================================================
+   BOOKING SEARCH — hero e inline
+============================================================ */
+
+rf-booking-search { display: block; width: 100%; }
+
+.booking-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.booking-search--hero {
+  padding: 0.7rem;
+  background: rgba(255, 251, 244, 0.94);
+  border: 1px solid rgba(255, 251, 244, 0.55);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 12px 40px rgba(14, 36, 28, 0.28);
+  backdrop-filter: blur(10px);
+}
+
+.booking-search__fields {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.booking-search__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius-m);
+  background: var(--sand-200);
+}
+
+.booking-search__field span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.booking-search__field input,
+.booking-search__field select {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0;
+  min-height: 1.5rem;
+}
+
+.booking-search__field input:focus,
+.booking-search__field select:focus {
+  outline: none;
+}
+
+.booking-search__field:focus-within {
+  outline: 2px solid var(--agua-400);
+  outline-offset: 1px;
+}
+
+.booking-search__submit {
+  flex: 0 0 auto;
+  align-self: stretch;
+  min-width: 7.5rem;
+  padding-inline: 1.25rem;
+}
+
+.booking-search--inline {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .booking-search__fields {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-search--hero {
+    padding: 0.55rem;
+  }
+
+  .booking-search {
+    flex-direction: column;
+  }
+
+  .booking-search__fields {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .booking-search__submit {
+    width: 100%;
+    min-height: 3rem;
+  }
+}

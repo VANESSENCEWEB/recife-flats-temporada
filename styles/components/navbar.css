@@ -40,11 +40,11 @@ rf-navbar {
   box-shadow: none;
 }
 
-/* Após scroll ou páginas internas — maré sólida */
+/* Após scroll ou páginas internas — azul orla */
 .navbar.is-scrolled {
-  background: var(--mangue-600);
+  background: var(--orla-700);
   padding: 12px 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgba(10, 31, 50, 0.22);
 }
 
 .navbar__inner {
@@ -65,7 +65,7 @@ rf-navbar {
 .navbar__logo-icon {
   width: 36px;
   height: 36px;
-  background: var(--terracotta-600);
+  background: var(--sol-500);
   border-radius: var(--radius-s);
   display: grid;
   place-items: center;
@@ -73,7 +73,7 @@ rf-navbar {
   transition: background var(--dur-base);
 }
 
-.navbar__logo:hover .navbar__logo-icon { background: var(--terracotta-800); }
+.navbar__logo:hover .navbar__logo-icon { background: var(--sol-600); }
 
 .navbar__logo-text {
   display: flex;

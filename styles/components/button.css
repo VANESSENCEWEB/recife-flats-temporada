@@ -25,13 +25,13 @@
 .btn:hover { transform: translateY(-2px); }
 
 .btn--primary {
-  background: var(--terracotta-600);
-  color: var(--paper);
-  box-shadow: var(--shadow-clay);
+  background: var(--sol-500);
+  color: var(--orla-900);
+  box-shadow: 0 6px 16px rgba(232, 169, 58, 0.35);
 }
 
 .btn--primary:hover {
-  background: var(--terracotta-800);
+  background: var(--sol-600);
 }
 
 .btn--outline {
@@ -45,13 +45,13 @@
 }
 
 .btn--secondary {
-  background: var(--mangue-600);
+  background: var(--orla-600);
   color: var(--paper);
-  box-shadow: 0 6px 16px rgba(51, 81, 63, 0.28);
+  box-shadow: 0 6px 16px rgba(31, 103, 153, 0.28);
 }
 
 .btn--secondary:hover {
-  background: var(--mangue-800);
+  background: var(--orla-800);
 }
 
 .btn--ghost {

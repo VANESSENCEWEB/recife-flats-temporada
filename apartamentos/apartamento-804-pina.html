@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="pina">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apartamento 2 Quartos no Pina ao lado do RioMar — Recife Flats Temporada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..700,0..1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/tokens.css" />
+  <link rel="stylesheet" href="../styles/base.css" />
+  <link rel="stylesheet" href="../styles/design-system.css" />
+  <link rel="stylesheet" href="../styles/utilities.css" />
+  <link rel="stylesheet" href="../styles/components/announcement.css" />
+  <link rel="stylesheet" href="../styles/components/button.css" />
+  <link rel="stylesheet" href="../styles/components/navbar.css" />
+  <link rel="stylesheet" href="../styles/components/menu-overlay.css" />
+  <link rel="stylesheet" href="../styles/components/breadcrumbs.css" />
+  <link rel="stylesheet" href="../styles/components/apartment-detail.css" />
+  <link rel="stylesheet" href="../styles/components/beach-decor.css" />
+  <link rel="stylesheet" href="../styles/components/footer.css" />
+  <link rel="stylesheet" href="../styles/components/floating-whatsapp.css" />
+  <link rel="stylesheet" href="../styles/pages/apartamentos.css" />
+</head>
+<body>
+  <rf-menu wraps=".site-content"></rf-menu>
+  <div class="site-content">
+    <rf-announcement><strong>Reserve direto</strong> — atendimento rápido pelo WhatsApp</rf-announcement>
+    <rf-navbar></rf-navbar>
+    <main>
+      <div class="page-shell__breadcrumbs">
+        <div class="container">
+          <rf-breadcrumbs context="apartment" slug="apartamento-804-pina"></rf-breadcrumbs>
+        </div>
+      </div>
+      <rf-apartment-detail slug="apartamento-804-pina"></rf-apartment-detail>
+    </main>
+    <rf-footer></rf-footer>
+  </div>
+  <rf-floating-whatsapp></rf-floating-whatsapp>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>

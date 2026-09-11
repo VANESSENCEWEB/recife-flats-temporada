@@ -16,7 +16,7 @@
   --sol-800: #8F520F;
   --sol-900: #6B3C0C;
 
-  /* ---------- ÁGUA / ORLA (apoio) ---------- */
+  /* ---------- ÁGUA / TEAL (apoio geral) ---------- */
   --agua-100: #E7F6F7;
   --agua-200: #C8EAED;
   --agua-300: #8FD0D6;
@@ -24,6 +24,18 @@
   --agua-500: #2A8F9C;  /* água clara, não neon */
   --agua-600: #1F6F7A;
   --agua-700: #18565E;
+
+  /* ---------- ORLA / AZUL (Boa Viagem — praia) ---------- */
+  --orla-100: #F0F7FC;
+  --orla-200: #D9ECF8;
+  --orla-300: #A8D2EF;
+  --orla-400: #6BB3E0;
+  --orla-500: #3B96CD;   /* azul médio mais claro */
+  --orla-600: #2A7FB8;   /* principal — mais claro que #1F6799 */
+  --orla-700: #1F6594;
+  --orla-800: #133C5C;
+  --orla-900: #0E2B43;
+  --orla-1000: #0A1F32;
 
   /* ---------- MANGUE (mais aberto / menos “floresta”) ---------- */
   --mangue-100: #EEF5F1;
@@ -50,9 +62,9 @@
   --sand-900:     #5C4F41;
   --sand-1000:    #453A2F;
   --sand-1100:    #332A22;
-  --ink:          #243028;  /* verde-escuro suave, não marrom pesado */
-  --ink-soft:     #5A6A60;
-  --line:         rgba(36, 48, 40, 0.12);
+  --ink:          #1C2A36;  /* azul-areia (praia), não mangue */
+  --ink-soft:     #5A6B78;
+  --line:         rgba(28, 42, 54, 0.12);
 
   /* terracota fica só como apoio (não manda mais no visual) */
   --terracotta-100: #FDF1EC;
@@ -70,22 +82,23 @@
   --gold-dark:    var(--sol-600);
 
 
-  /* ---------- ALIASES (pra o site atual continuar funcionando) ---------- */
+  /* ---------- ALIASES — marca praia: azul orla + sol/areia ---------- */
   --areia:         var(--sand-200);
   --areia-escura:  var(--sand-300);
-  --mare:          var(--mangue-600);
-  --mare-escuro:   var(--mangue-800);
-  --mare-claro:    var(--mangue-500);
-  --tijolo:        var(--sol-500);       /* botões passam a “sol” */
+  --mare:          var(--orla-600);
+  --mare-escuro:   var(--orla-800);
+  --mare-claro:    var(--orla-500);
+  --mare-text-soft: rgba(255, 251, 244, 0.72);
+  --tijolo:        var(--sol-500);
   --tijolo-escuro: var(--sol-700);
-  --coco:          var(--mangue-600);
+  --coco:          var(--orla-600);
   --sol:           var(--sol-400);
   --tinta:         var(--ink);
   --branco:        var(--paper);
   --cream:         var(--sand-200);
   --cream-dark:    var(--sand-300);
-  --ocean:         var(--mangue-600);
-  --ocean-light:   var(--mangue-500);
+  --ocean:         var(--orla-600);
+  --ocean-light:   var(--orla-500);
   --clay:          var(--sol-500);
   --clay-light:    var(--sol-700);
   --sand:          var(--sol-300);
@@ -96,14 +109,14 @@
   --text:          var(--ink);
   --text-muted:    var(--ink-soft);
   --white:         var(--paper);
-  --black:         var(--mangue-900);
-  --accent:        var(--sol-500);       /* CTA principal = sol */
+  --black:         var(--orla-900);
+  --accent:        var(--sol-500);       /* CTA = sol / amarelo praia */
   --accent-soft:   var(--sol-200);
-  --accent-dark:   var(--mangue-600);
-  --accent-darker: var(--mangue-800);
-  --brand-blue:    var(--agua-500);      /* toque de orla */
-  --sky-soft:      var(--agua-100);
-  --sky-mid:       var(--agua-300);
+  --accent-dark:   var(--orla-600);
+  --accent-darker: var(--orla-800);
+  --brand-blue:    var(--orla-500);
+  --sky-soft:      var(--orla-100);
+  --sky-mid:       var(--orla-300);
 
 
   /* ---------- TIPOGRAFIA ---------- */
@@ -194,6 +207,56 @@
   --section-py: clamp(4rem, 7vw, 6rem);
   --fs-section-title: clamp(1.75rem, 3.2vw, 2.875rem);
   --fs-section-lead: 1.05rem;
+
+  /* Tema semântico por bairro (padrão = praia / orla) */
+  --theme-accent: var(--orla-600);
+  --theme-accent-soft: var(--orla-100);
+  --theme-accent-deep: var(--orla-800);
+  --theme-surface: var(--orla-1000);
+}
+
+/* Boa Viagem — azul orla (praia), sem trocar a marca global */
+[data-theme="boa-viagem"] {
+  --theme-accent: var(--orla-600);
+  --theme-accent-soft: var(--orla-100);
+  --theme-accent-deep: var(--orla-800);
+  --theme-surface: var(--orla-1000);
+
+  --agua-100: var(--orla-100);
+  --agua-200: var(--orla-200);
+  --agua-300: var(--orla-300);
+  --agua-400: var(--orla-400);
+  --agua-500: var(--orla-500);
+  --agua-600: var(--orla-600);
+  --agua-700: var(--orla-700);
+
+  --mangue-500: var(--orla-500);
+  --mangue-600: var(--orla-600);
+  --mangue-700: var(--orla-700);
+  --mangue-800: var(--orla-800);
+  --mangue-900: var(--orla-900);
+  --mangue-1000: var(--orla-1000);
+
+  --mare: var(--orla-600);
+  --mare-escuro: var(--orla-800);
+  --mare-claro: var(--orla-500);
+  --ocean: var(--orla-600);
+  --ocean-light: var(--orla-500);
+  --accent-dark: var(--orla-600);
+  --accent-darker: var(--orla-800);
+  --brand-blue: var(--orla-500);
+  --sky-soft: var(--orla-100);
+  --sky-mid: var(--orla-300);
+  --ink: #1C2A36;
+  --ink-soft: #5A6B78;
+  --line: rgba(28, 42, 54, 0.12);
+}
+
+[data-theme="pina"] {
+  --theme-accent: var(--mangue-600);
+  --theme-accent-soft: var(--mangue-100);
+  --theme-accent-deep: var(--mangue-800);
+  --theme-surface: var(--mangue-1000);
 }
 
 @media (prefers-reduced-motion: reduce) {
